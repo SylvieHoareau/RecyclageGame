@@ -57,6 +57,9 @@ public class GameFlowManager : MonoBehaviour
         // Pas touche aux autres objets
 
         loopTimer = loopDuration;
+
+        // Réapplique l’état persistant aux objets de la scène
+        PersistentState.Instance.ApplyStateToScene();
     }
 
     public void EndLevel()

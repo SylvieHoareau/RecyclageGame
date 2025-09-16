@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class StrechingObject : MonoBehaviour
+public class StrechingObjectOld : MonoBehaviour
 {
 
     public Vector3 nextScale = Vector3.one;

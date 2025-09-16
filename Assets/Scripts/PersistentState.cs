@@ -12,7 +12,7 @@ public class PersistentState : MonoBehaviour
     private Dictionary<string, Vector3> stretchedObjects = new Dictionary<string, Vector3>();
 
     // Dictionnaire des positions des objets déplacés
-    private Dictionary<string, Vector3> movedObjets = new Dictionary<string, Vector3>();
+    private Dictionary<string, Vector3> movedObjects = new Dictionary<string, Vector3>();
 
 
     void Awake()
@@ -34,9 +34,11 @@ public class PersistentState : MonoBehaviour
     // ============================
     public void MarkAsDestroyed(GameObject obj)
     {
-        if (!string.IsNullOrEmpty(obj.name))
+
+        PersistentID id = obj.GetComponent<PersistentID>();
+        if (id != null)
         {
-            destroyedObjects.Add(obj.name);
+            destroyedObjects.Add(id.GUID);
         }
     }
 
@@ -50,9 +52,10 @@ public class PersistentState : MonoBehaviour
     //===========================
     public void SaveStretch(GameObject obj, Vector3 newScale)
     {
-        if (!string.IsNullOrEmpty(obj.name))
+        PersistentID id = obj.GetComponent<PersistentID>();
+        if (id != null)
         {
-            stretchedObjects[obj.name] = newScale;
+            stretchedObjects[id.GUID] = newScale;
         }
     }
 
@@ -68,7 +71,58 @@ public class PersistentState : MonoBehaviour
     // ==========================
     // Gestion du déplacement
     // ==========================
-    
+    public void SavePosition(GameObject obj, Vector3 newPos)
+    {
+        PersistentID id = obj.GetComponent<PersistentID>();
+        if (id != null)
+        {
+            movedObjects[id.GUID] = newPos;
+        }
+    }
+
+    public Vector3? GetSavedPosition(string objName)
+    {
+        if (movedObjects.ContainsKey(objName))
+        {
+            return movedObjects[objName];
+        }
+        return null;
+    }
+
+    //=====================
+    // Application des états
+    //======================
+    public void ApplyStateToScene()
+    {
+        foreach (GameObject obj in FindObjectsOfType<GameObject>())
+        {
+            PersistentID id = obj.GetComponent<PersistentID>();
+            if (id == null) continue;
+
+            string objID = id.GUID;
+
+            // Vérifie destruction
+            if (IsDestroyed(objID))
+            {
+                Destroy(obj);
+                continue;
+            }
+
+            // Vérifie le stretching
+            Vector3? savedScale = GetStretch(objID);
+            if (savedScale.HasValue)
+            {
+                obj.transform.localScale = savedScale.Value;
+            }
+
+            // Vérifie la position
+            Vector3? savedPos = GetSavedPosition(objID);
+            if (savedPos.HasValue)
+            {
+                obj.transform.position = savedPos.Value;
+            }
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
