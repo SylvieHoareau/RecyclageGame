@@ -165,6 +165,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -709,7 +735,31 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sheep_spritesheet_0: -7783502486661994904
+      sheep_spritesheet_1: 5537444572072033560
+      sheep_spritesheet_10: -6625937796870921819
+      sheep_spritesheet_11: 5601272970697916589
+      sheep_spritesheet_12: 125856589125034692
+      sheep_spritesheet_13: -3939324393169866303
+      sheep_spritesheet_14: -2144996237269348244
+      sheep_spritesheet_15: 6298350597700518752
+      sheep_spritesheet_16: -6434579779142325207
+      sheep_spritesheet_17: 6748722843519832220
+      sheep_spritesheet_18: -5186714763225856854
+      sheep_spritesheet_19: -9202240176221230993
+      sheep_spritesheet_2: 1842744902353562987
+      sheep_spritesheet_20: 1917543153930133097
+      sheep_spritesheet_21: 8010150756075127146
+      sheep_spritesheet_22: -5977780673900968246
+      sheep_spritesheet_23: 548342602930503812
+      sheep_spritesheet_3: -8546602775816621500
+      sheep_spritesheet_4: 1853618351312272006
+      sheep_spritesheet_5: 4837421915465044087
+      sheep_spritesheet_6: 552487823611546702
+      sheep_spritesheet_7: -843334901653534482
+      sheep_spritesheet_8: -3723758596130753749
+      sheep_spritesheet_9: 5538051715169743896
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

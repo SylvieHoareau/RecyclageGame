@@ -159,6 +159,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -659,7 +685,29 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chicken_spritesheet_0: 7383821476218446286
+      chicken_spritesheet_1: -7720079401493481870
+      chicken_spritesheet_10: -3550737434919565081
+      chicken_spritesheet_11: 2547577937525943281
+      chicken_spritesheet_12: 3532748453642751295
+      chicken_spritesheet_13: 2889337604442341926
+      chicken_spritesheet_14: 7762100319093572753
+      chicken_spritesheet_15: -273448663809878083
+      chicken_spritesheet_16: -3197163486644530928
+      chicken_spritesheet_17: -2559463795723040874
+      chicken_spritesheet_18: 2027097686162304798
+      chicken_spritesheet_19: 880022361569655072
+      chicken_spritesheet_2: -6801852145618595812
+      chicken_spritesheet_20: -1149010833197143373
+      chicken_spritesheet_21: 6730365409233483033
+      chicken_spritesheet_3: -7491520115814473604
+      chicken_spritesheet_4: 4817639658001699110
+      chicken_spritesheet_5: -7044043244948114968
+      chicken_spritesheet_6: 2839090747822067927
+      chicken_spritesheet_7: -2150415911243236320
+      chicken_spritesheet_8: -2044293445020178088
+      chicken_spritesheet_9: 4458020676954845761
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
