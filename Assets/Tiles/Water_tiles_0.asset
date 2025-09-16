@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Water_tiles_0
+  m_Name: water_tiles_0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -3570886940855412533, guid: 99d50d9713004c84e866ea178d18a3ef, type: 3}
+  m_Sprite: {fileID: 6875317633668720372, guid: 53b824d26c6b6774f86230c8cac01126, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

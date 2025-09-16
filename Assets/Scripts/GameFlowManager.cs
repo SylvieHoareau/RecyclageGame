@@ -10,7 +10,7 @@ public class GameFlowManager : MonoBehaviour
     private GameObject player;
 
     [Header("Boucle temporelle")]
-    public float loopDuration = 20f; // durée d'une boucke en secondes
+    public float loopDuration = 20f; // durée d'une boucle en secondes
     private float loopTimer;
 
     void Awake()
