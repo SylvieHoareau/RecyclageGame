@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjectDestroyer : MonoBehaviour
+public class ObjectDestroyerOld : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collision)
     {
