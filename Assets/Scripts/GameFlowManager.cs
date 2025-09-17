@@ -28,6 +28,8 @@ public class GameFlowManager : MonoBehaviour
     public float loopDuration = 20f; // durée d'une boucle en secondes
     [HideInInspector] // On masque cette variable dans l'éditeur car elle est mise à jour par le script
     public float loopTimer;
+    [HideInInspector] // Variable publique pour que la LoopBar puisse y accéder
+    public int loopCount = 1;
 
     void Awake()
     {
@@ -91,6 +93,9 @@ public class GameFlowManager : MonoBehaviour
         }
 
         // Pas touche aux autres objets
+
+        // Incrémente le compteur de boucle à chaque réinitialisation
+        loopCount++; 
 
         loopTimer = loopDuration;
 
