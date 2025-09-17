@@ -34,6 +34,8 @@ public class GameFlowManager : MonoBehaviour
     [HideInInspector] // Variable publique pour que la LoopBar puisse y accéder
     public int loopCount = 1;
 
+    public event System.Action OnLoopRestart;
+
     void Awake()
     {
         // Singleton
@@ -124,14 +126,14 @@ public class GameFlowManager : MonoBehaviour
     //     currentPlayerInstance = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
     // }
 
-     public void RestartLoop()
+    public void RestartLoop()
     {
         Debug.Log("Nouvelle boucle");
 
         // Sauvegarde l'état actuel avant de le réinitialiser
         // pour que les changements de la boucle précédente soient mémorisés.
         SaveCurrentState();
-        
+
         // Appelle la fonction ClearState pour effacer
         // l'état persistant et préparer la prochaine boucle.
         PersistentState.Instance.ClearState();
@@ -143,6 +145,9 @@ public class GameFlowManager : MonoBehaviour
 
         // Réapplique l’état persistant aux objets de la scène
         PersistentState.Instance.ApplyStateToScene();
+        
+        // 🔔 Prévenir les autres scripts
+        OnLoopRestart?.Invoke();
     }
 
     // Méthode pour sauvegarder l'état (à la fin de la boucle)
