@@ -29,6 +29,20 @@ public class PersistentState : MonoBehaviour
         }
     }
 
+    // ===========================
+    // Ajout de la fonction ClearState
+    // ===========================
+    public void ClearState()
+    {
+        // Efface tous les éléments des collections de persistance.
+        // C'est le moyen le plus simple et efficace de réinitialiser l'état.
+        destroyedObjects.Clear();
+        stretchedObjects.Clear();
+        movedObjects.Clear();
+
+        Debug.Log("L'état persistant a été réinitialisé.");
+    }
+
     // ============================
     // Gestion de la destruction 
     // ============================

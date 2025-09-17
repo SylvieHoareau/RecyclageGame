@@ -7,6 +7,9 @@ public class GameFlowManager : MonoBehaviour
 {
     public static GameFlowManager Instance; // Singleton
 
+    [Header("Paramètres de scènes")]
+    [SerializeField] private string nextSceneName = ""; // Nom de la scène suivante
+
     [Header("Player")]
     [SerializeField] private Transform playerSpawn; // point de respawn
     private GameObject player;
@@ -50,6 +53,8 @@ public class GameFlowManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         loopTimer = loopDuration;
+
+        InitializeLevel();
     }
 
     // Update is called once per frame
@@ -65,6 +70,46 @@ public class GameFlowManager : MonoBehaviour
             RestartLoop();
         }
     }
+    
+      // S'abonne à l'événement de changement de scène
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // Se désabonne à l'événement de changement de scène
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Méthode appelée après le chargement d'une nouvelle scène
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Réinitialiser les paramètres pour la nouvelle scène
+        InitializeLevel();
+    }
+
+    private void InitializeLevel()
+    {
+        // Cherche le joueur dans la scène actuelle et le point de spawn
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogError("Player non trouvé ! Assurez-vous que l'objet a le tag 'Player'.");
+            return;
+        }
+
+        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
+        if (playerSpawn == null)
+        {
+            Debug.LogError("PlayerSpawn non trouvé ! Assurez-vous que l'objet a le tag 'PlayerSpawn'.");
+            return;
+        }
+
+        // Réinitialise le timer de la boucle
+        loopTimer = loopDuration;
+    }
 
     // Crée une nouvelle instance du joueur et met à jour la référence
     // private void InstantiatePlayer()
@@ -79,23 +124,20 @@ public class GameFlowManager : MonoBehaviour
     //     currentPlayerInstance = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
     // }
 
-    public void RestartLoop()
+     public void RestartLoop()
     {
         Debug.Log("Nouvelle boucle");
 
-        // Utilise la référence déjà existante pour réinitialiser la position
-        // currentPlayerInstance.transform.position = playerSpawn.position;
+        // Sauvegarde l'état actuel avant de le réinitialiser
+        // pour que les changements de la boucle précédente soient mémorisés.
+        SaveCurrentState();
+        
+        // Appelle la fonction ClearState pour effacer
+        // l'état persistant et préparer la prochaine boucle.
+        PersistentState.Instance.ClearState();
 
-        // Réinitialise seulement le joueur à sa position de départ
-        if (player != null)
-        {
-            player.transform.position = playerSpawn.position;
-        }
-
-        // Pas touche aux autres objets
-
-        // Incrémente le compteur de boucle à chaque réinitialisation
-        loopCount++; 
+        // Réinitialise seulement le joueur
+        player.transform.position = playerSpawn.position;
 
         loopTimer = loopDuration;
 
@@ -103,17 +145,18 @@ public class GameFlowManager : MonoBehaviour
         PersistentState.Instance.ApplyStateToScene();
     }
 
-    // Méthode pour sauvegarder l'état
-    // private void SaveCurrentState()
-    // {
-    //     // Sauvegarde la position de tous les SlidingObject à la fin de la boucle
-    //     // Ceci est une solution simple, mais fonctionne.
-    //     var slidingObjects = FindObjectsOfType<SlidingObject>();
-    //     foreach (var obj in slidingObjects)
-    //     {
-    //         PersistentState.Instance.SavePosition(obj.gameObject, obj.transform.position);
-    //     }
-    // }
+    // Méthode pour sauvegarder l'état (à la fin de la boucle)
+    private void SaveCurrentState()
+    {
+        // Sauvegarde l'état de tous les objets persistants
+        var persistentObjects = FindObjectsOfType<PersistentID>();
+        foreach (var obj in persistentObjects)
+        {
+            PersistentState.Instance.SavePosition(obj.gameObject, obj.transform.position);
+            PersistentState.Instance.SaveStretch(obj.gameObject, obj.transform.localScale);
+            // etc. si d'autres états sont à sauvegarder
+        }
+    }
 
     // Méthode pour gérer l'interaction avec le TriggerObject
     public void HandleTrigger(GameObject triggeredObject)
@@ -182,8 +225,9 @@ public class GameFlowManager : MonoBehaviour
     public void EndLevel()
     {
         Debug.Log("Niveau terminé !");
-        // Ici, on charge le niveau suivant
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        // Réinitialise l'état persistant avant de changer de scène pour éviter les bugs
+        PersistentState.Instance.ClearState();
+        SceneManager.LoadScene(nextSceneName);
     }
     
 

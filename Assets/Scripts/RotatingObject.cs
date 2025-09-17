@@ -1,8 +1,16 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Gère la rotation constante d'un objet.
+/// Peut également appliquer une force au joueur en cas de collision.
+/// </summary>
 public class RotatingObject : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 10;
+    // Vitesse de rotation en degrés par seconde. Visible et modifiable dans l'inspecteur.
+    [SerializeField] private float _rotationSpeed = 10f;
+    // Force appliquée au joueur lors d'une collision.
+    [SerializeField] private float _pushForce = 10f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -10,12 +18,17 @@ public class RotatingObject : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // La méthode Update est appelée à chaque frame du jeu.
     void Update()
     {
-        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+        // On fait tourner l'objet autour de son axe Z.
+        // Vector3.forward correspond à l'axe Z, ce qui est parfait pour la 2D.
+        // On multiplie par Time.deltaTime pour rendre la rotation fluide et indépendante du framerate.
+        transform.Rotate(Vector3.forward * _rotationSpeed * Time.deltaTime);
     }
-    
+
+    // Cette méthode est appelée par le moteur physique Unity
+    // lorsqu'un objet entre en collision avec le nôtre (2D).
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -26,7 +39,9 @@ public class RotatingObject : MonoBehaviour
             {
                 // Pousse le joueur dans la direction opposée
                 Vector2 pushDirection = (playerRb.transform.position - transform.position).normalized;
-                playerRb.AddForce(pushDirection * 10f, ForceMode2D.Impulse); 
+
+                // On applique la force instantanément (ForceMode2D.Impulse).
+                playerRb.AddForce(pushDirection * _pushForce, ForceMode2D.Impulse); 
             }
         }
     }
