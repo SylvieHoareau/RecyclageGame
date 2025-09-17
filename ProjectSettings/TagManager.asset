@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Crate
   - Spawner Object
+  - Player Spawn
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX
