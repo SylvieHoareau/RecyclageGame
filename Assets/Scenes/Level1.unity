@@ -7057,6 +7057,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1731797022
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731797005}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0bbae813685c95e029fb07cab5c5317c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1747331932
 GameObject:
   m_ObjectHideFlags: 0
@@ -8504,6 +8526,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3132012109937008956, guid: d9bdc97a8dbe6fe45983320f53e51be5, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Mouse and Keyboard
+      objectReference: {fileID: 0}
     - target: {fileID: 3673908210408302873, guid: d9bdc97a8dbe6fe45983320f53e51be5, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -8567,6 +8593,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7304612457334353864, guid: d9bdc97a8dbe6fe45983320f53e51be5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1731797021}
+    - targetCorrespondingSourceObject: {fileID: 7304612457334353864, guid: d9bdc97a8dbe6fe45983320f53e51be5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1731797022}
   m_SourcePrefab: {fileID: 100100000, guid: d9bdc97a8dbe6fe45983320f53e51be5, type: 3}
 --- !u!1001 &6783928811466934185
 PrefabInstance:
