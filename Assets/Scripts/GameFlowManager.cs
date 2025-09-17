@@ -43,6 +43,8 @@ public class GameFlowManager : MonoBehaviour
 
         if (loopTimer <= 0f)
         {
+            // Appelle la méthode pour sauvegarder l'état
+            SaveCurrentState();
             RestartLoop();
         }
     }
@@ -60,6 +62,18 @@ public class GameFlowManager : MonoBehaviour
 
         // Réapplique l’état persistant aux objets de la scène
         PersistentState.Instance.ApplyStateToScene();
+    }
+
+    // Méthode pour sauvegarder l'état
+    private void SaveCurrentState()
+    {
+        // Sauvegarde la position de tous les SlidingObject à la fin de la boucle
+        // Ceci est une solution simple, mais fonctionne.
+        var slidingObjects = FindObjectsOfType<SlidingObject>();
+        foreach (var obj in slidingObjects)
+        {
+            PersistentState.Instance.SavePosition(obj.gameObject, obj.transform.position);
+        }
     }
 
     public void EndLevel()
