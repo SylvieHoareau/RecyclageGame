@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpawnerObjectOld : MonoBehaviour
+public class SpawnerObject : MonoBehaviour
 {
 
     public GameObject spawnPrefab;

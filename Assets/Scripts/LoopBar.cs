@@ -11,26 +11,27 @@ public class LoopBar : MonoBehaviour
     [Header("Loop Settings")]
     [SerializeField] private float loopDuration = 10f; // durée d'une boucle en secondes
 
-    private float timer = 0f;
-    private int loopCount = 1;
-
     void Update()
     {
-        // Avance le timer
-        timer += Time.deltaTime;
+         // On s'assure que l'instance du manager existe pour éviter les erreurs
+        if (GameFlowManager.Instance == null)
+        {
+            return;
+        }
 
-        // Calcul du pourcentage de la barre
-        float fillAmount = Mathf.Clamp01(timer / loopDuration);
+        // On lit les valeurs directement depuis le GameFlowManager
+        float currentLoopTime = GameFlowManager.Instance.loopTimer;
+        float loopDuration = GameFlowManager.Instance.loopDuration;
+
+        // Calcul du pourcentage de la barre basé sur le temps restant
+        // On inverse le calcul pour que la barre se vide avec le temps
+        float fillAmount = Mathf.Clamp01(currentLoopTime / loopDuration);
         loopFill.fillAmount = fillAmount;
 
-        // Check si la boucle est terminée
-        if (timer >= loopDuration)
-        {
-            timer = 0f;
-            loopCount++;
-            loopCounterText.text = $"Boucle : {loopCount}";
-            OnLoopReset();
-        }
+        // On formate le texte pour afficher le temps restant
+        int minutes = Mathf.FloorToInt(currentLoopTime / 60);
+        int seconds = Mathf.FloorToInt(currentLoopTime % 60);
+        loopCounterText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     private void OnLoopReset()
