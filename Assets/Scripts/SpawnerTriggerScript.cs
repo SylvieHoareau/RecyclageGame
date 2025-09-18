@@ -20,7 +20,7 @@ public class SpawnerTriggerScript : MonoBehaviour
             Debug.Log("Le joueur est entré dans le trigger !");
             if (spawner != null)
             {
-                spawner.Spawn(); // déclenche le spawner
+                spawner.SpawnAll(); // déclenche le spawner
                 triggered = true; // une seule fois
             }
             else

@@ -243,14 +243,20 @@ public class GameFlowManager : MonoBehaviour
         Debug.Log("Le joueur a atteint le point de fin de niveau !");
 
         // Fait apparaître des fleurs à la position du spawner
-        if (spawnerToTrigger != null && flowersPrefab != null)
+        // if (spawnerToTrigger != null && flowersPrefab != null)
+        // {
+        //     for (int i = 0; i < flowersToSpawn; i++)
+        //     {
+        //         // Ici, on instancie les fleurs. On pourrait ajouter une légère variance
+        //         Vector3 spawnPosition = spawnerToTrigger.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+        //         Instantiate(flowersPrefab, spawnPosition, Quaternion.identity);
+        //     }
+        // }
+
+        // Fait apparaître tous les prefabs configurés dans le spawner
+        if (spawnerToTrigger != null)
         {
-            for (int i = 0; i < flowersToSpawn; i++)
-            {
-                // Ici, on instancie les fleurs. On pourrait ajouter une légère variance
-                Vector3 spawnPosition = spawnerToTrigger.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-                Instantiate(flowersPrefab, spawnPosition, Quaternion.identity);
-            }
+            spawnerToTrigger.SpawnAll();
         }
 
         // On appelle la fonction de fin de niveau après un court délai pour laisser l'animation des fleurs se faire
