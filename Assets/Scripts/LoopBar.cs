@@ -7,8 +7,8 @@ public class LoopBar : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private Image loopFill;
-    [SerializeField] private TextMeshProUGUI loopCounterText; // ou Text si pas TMP
-
+    [SerializeField] private TextMeshProUGUI loopTimerText; // pour 00:00
+    [SerializeField] private TextMeshProUGUI loopCounterText; // pour Boucle 1, Boucle 2...
     [Header("Loop Settings")]
     [SerializeField] private float loopDuration = 10f; // durée d'une boucle en secondes
 
@@ -38,9 +38,16 @@ public class LoopBar : MonoBehaviour
         loopFill.fillAmount = fillAmount;
 
         // On formate le texte pour afficher le temps restant
+        // Timer (00:00)
         int minutes = Mathf.FloorToInt(currentLoopTime / 60);
         int seconds = Mathf.FloorToInt(currentLoopTime % 60);
         loopCounterText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        // Numéro de boucle
+        if (loopCounterText != null)
+        {
+            loopCounterText.text = $"Boucle {GameFlowManager.Instance.loopCount}";
+        }
     }
 
     private void OnDestroy()

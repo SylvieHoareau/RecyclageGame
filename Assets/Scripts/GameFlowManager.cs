@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Gère la boucle temporelle, la progression du niveau et la fin de partie.
+/// Compatible avec le niveau 1 (caisse/pont) et le niveau 2 (collectibles + UI).
 /// </summary>
 public class GameFlowManager : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class GameFlowManager : MonoBehaviour
     // Événement appelé à chaque redémarrage de boucle
     public event System.Action OnLoopRestart;
 
+    [Header("UI")]
+    [SerializeField] private InventoryUI inventoryUI;
+
     // --- LIFECYCLE ---
     void Awake()
     {
@@ -54,6 +58,7 @@ public class GameFlowManager : MonoBehaviour
     void Start()
     {
         InitializeLevel();
+        inventoryUI.RefreshInventory(); // Affiche l'inventaire au départ
     }
 
     void Update()
@@ -94,6 +99,7 @@ public class GameFlowManager : MonoBehaviour
     {
         // Réinitialiser les paramètres pour la nouvelle scène
         InitializeLevel();
+        inventoryUI?.RefreshInventory();
     }
 
     private void InitializeLevel()
@@ -106,6 +112,7 @@ public class GameFlowManager : MonoBehaviour
             return;
         }
 
+        // Cherche le point de spawn
         GameObject spawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
         if (spawn == null)
         {
@@ -132,7 +139,7 @@ public class GameFlowManager : MonoBehaviour
 
     public void RestartLoop()
     {
-        Debug.Log("Nouvelle boucle #{loopCount +1}");
+        Debug.Log($"Nouvelle boucle #{loopCount +1}");
 
         // Sauvegarde l'état actuel avant de le réinitialiser
         // pour que les changements de la boucle précédente soient mémorisés.
@@ -142,13 +149,13 @@ public class GameFlowManager : MonoBehaviour
         // l'état persistant et préparer la prochaine boucle.
         PersistentState.Instance.ClearState();
 
-        // 3. Replace le joueur au spawn
+        // Replace le joueur au spawn
         if (player != null && playerSpawn != null)
         {
             player.transform.position = playerSpawn.position;
         }
 
-         // 4. Reset du timer
+        // Reset du timer
         loopTimer = loopDuration;
         loopCount++;
 
@@ -172,14 +179,14 @@ public class GameFlowManager : MonoBehaviour
         }
     }
 
+    // --- TRIGGERS & INTERACTIONS ---
     // Méthode pour gérer l'interaction avec le TriggerObject
     public void HandleTrigger(GameObject triggeredObject)
     {
-        // 1. On vérifie si l'objet qui est entré dans le trigger est la caisse.
+        // . On vérifie si l'objet qui est entré dans le trigger est la caisse.
         if (triggeredObject.CompareTag("Crate"))
         {
-            // 2. Si c'est la caisse, on trouve le pont et on appelle sa méthode d'étirement.
-            //    Assurez-vous que votre pont a bien le script StrechingObject.
+            // Trouve l'objet Bridge avec le script StrechingObject.
             var bridge = FindObjectOfType<StrechingObject>();
             if (bridge != null)
             {
@@ -188,6 +195,41 @@ public class GameFlowManager : MonoBehaviour
             // Ici, vous pourriez aussi gérer d'autres actions, comme un son ou un effet visuel.
         }
     }
+
+    // Méthode pour la collecte des objets dans le niveau 2
+    public void HandleCollectible(Collectible collectible, GameObject collector)
+    {
+        // Crée un Item à partir du Collectible
+        Item newItem = new Item(collectible.itemName, collectible.itemSprite);
+
+        // Ajout à l'inventaire persistant
+        Inventory.Instance.AddItem(newItem);
+        Debug.Log($"[GameFlowManager] Collecté : {collectible.itemName}");
+
+        // Ajouter ici des effets de feedback (sons, particules…)
+        // Example : PlaySFX("Pickup"); ou VFXManager.SpawnEffect(...)
+
+        // Détruire l'objet si nécessaire
+        if (collectible.destroyOnCollect)
+        {
+            Destroy(collectible.gameObject);
+        }
+
+        // Actualise l'UI
+        InventoryUI inventoryUI = FindObjectOfType<InventoryUI>();
+        if (inventoryUI != null)
+        {
+            inventoryUI.RefreshInventory();
+        }
+
+        // (Optionnel) progression de niveau
+        // Ex : si tu veux que collecter X objets valide un objectif :
+        // if (Inventory.Instance.GetAllItems().Count >= requiredCollectibles)
+        // {
+        //     HandleLevelCompletion();
+        // }
+    }
+
 
     /// <summary>
     /// Gère la logique de fin de niveau.
@@ -221,10 +263,12 @@ public class GameFlowManager : MonoBehaviour
     public void EndLevel()
     {
         Debug.Log("Niveau terminé !");
+
+        // (Optionnel) Reset de l'inventaire pour le prochain niveau
+        Inventory.Instance.ClearInventory();
+
         // Réinitialise l'état persistant avant de changer de scène pour éviter les bugs
         PersistentState.Instance.ClearState();
         SceneManager.LoadScene(nextSceneName);
     }
-    
-
 }
