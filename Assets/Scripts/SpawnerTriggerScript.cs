@@ -8,11 +8,16 @@ public class SpawnerTriggerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Identifier les problèmes de collider ou de tag
+        Debug.Log($"Trigger détecté avec {other.name}");
+
         if (triggered) return;
 
         // Vérifie si c'est le joueur
         if (other.CompareTag("Player"))
         {
+            // Identfier les problèmes d'assignation dans SpawnerObject
+            Debug.Log("Le joueur est entré dans le trigger !");
             if (spawner != null)
             {
                 spawner.Spawn(); // déclenche le spawner
@@ -20,6 +25,7 @@ public class SpawnerTriggerScript : MonoBehaviour
             }
             else
             {
+                // Identifier si le tableau est vide dans l'inspecteur
                 Debug.LogWarning("Spawner non assigné sur SpawnerTrigger !");
             }
         }

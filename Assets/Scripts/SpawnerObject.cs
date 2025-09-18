@@ -2,32 +2,40 @@ using UnityEngine;
 
 public class SpawnerObject : MonoBehaviour
 {
-    [Header("Prefabs")]
-    public GameObject flowersPrefab;        // Prefab pour niveau 1
-    public GameObject collectiblePrefab;    // Prefab pour niveau 2
-    private GameObject prefabToSpawn;       // Prefab actif pour cette scène
+    [Header("Prefabs à spawn")]
+    public GameObject[] flowersPrefabs;       // plusieurs fleurs pour niveau 1
+    public GameObject[] collectiblesPrefabs;  // plusieurs collectibles pour niveau 2
 
-    [Header("Paramètres du spawn")]
-    public int amount = 1;
+    private GameObject[] prefabsToSpawn;      // les prefabs actifs pour cette scène
+    public int amount = 1;                    
 
     void Start()
     {
-        // Sélectionne le prefab selon la scène
         string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
         if (sceneName == "Level1")
-            prefabToSpawn = flowersPrefab;
+            prefabsToSpawn = flowersPrefabs;
         else if (sceneName == "Level2")
-            prefabToSpawn = collectiblePrefab;
+            prefabsToSpawn = collectiblesPrefabs;
     }
 
     public void Spawn()
     {
+        Debug.Log("Spawn() appelé !");
         for (int i = 0; i < amount; i++)
         {
-            Vector3 pos = transform.position + new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f), 0);
-            Instantiate(prefabToSpawn, pos, Quaternion.identity);
-        }
+            if (prefabsToSpawn.Length == 0)
+            {
+                Debug.LogWarning("Aucun prefab assigné à spawn !");
+                return;
+            }
 
-        Debug.Log($"Spawned {amount} objects at {transform.position} in scene {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name}");
+            // Choisit un prefab aléatoire dans le tableau
+            GameObject prefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Length)];
+
+            Vector3 pos = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            Instantiate(prefab, pos, Quaternion.identity);
+            Debug.Log($"✅ Spawn de {prefab.name} en {pos}");
+        }
     }
 }
