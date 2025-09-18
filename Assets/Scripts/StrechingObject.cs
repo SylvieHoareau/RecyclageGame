@@ -9,6 +9,7 @@ public class StrechingObject : MonoBehaviour
 
     private BoxCollider2D boxCollider;
     private Vector2 originalColliderSize;
+    [SerializeField] private Collider2D waterCollider; // le collider de l'eau sous le pont
 
 
     void Awake()
@@ -54,7 +55,14 @@ public class StrechingObject : MonoBehaviour
 
     public void ChangeStretch()
     {
+        // Sert à étirer le pont
         targetScale = nextScale;
         PersistentState.Instance.SaveStretch(gameObject, targetScale);
+
+        // Ensuite, on désactive l'eau quand le pont est ouvert
+        if (waterCollider != null)
+        {
+            waterCollider.enabled = false;
+        }
     }
 }

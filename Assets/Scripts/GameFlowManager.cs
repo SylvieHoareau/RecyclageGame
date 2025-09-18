@@ -2,7 +2,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Responsable de la boucle temporelle
+/// <summary>
+/// Gère la boucle temporelle, la progression du niveau et la fin de partie.
+/// </summary>
 public class GameFlowManager : MonoBehaviour
 {
     public static GameFlowManager Instance; // Singleton
@@ -11,6 +13,7 @@ public class GameFlowManager : MonoBehaviour
     [SerializeField] private string nextSceneName = ""; // Nom de la scène suivante
 
     [Header("Player")]
+    [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform playerSpawn; // point de respawn
     private GameObject player;
 
@@ -21,11 +24,6 @@ public class GameFlowManager : MonoBehaviour
 
     private bool levelCompleted = false; // Pour éviter de déclencher l'événement plusieurs fois
 
-
-    // Ajoutez une référence directe au joueur ici
-    [SerializeField] private GameObject playerPrefab;
-    private GameObject currentPlayerInstance;
-
     [Header("Boucle temporelle")]
     [Tooltip("Durée d'une boucle en secondes")]
     public float loopDuration = 20f; // durée d'une boucle en secondes
@@ -34,8 +32,10 @@ public class GameFlowManager : MonoBehaviour
     [HideInInspector] // Variable publique pour que la LoopBar puisse y accéder
     public int loopCount = 1;
 
+    // Événement appelé à chaque redémarrage de boucle
     public event System.Action OnLoopRestart;
 
+    // --- LIFECYCLE ---
     void Awake()
     {
         // Singleton
@@ -53,10 +53,12 @@ public class GameFlowManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        loopTimer = loopDuration;
-
         InitializeLevel();
+    }
+
+    void Update()
+    {
+        HandleLoopTimer();
     }
 
     // Update is called once per frame
@@ -85,6 +87,8 @@ public class GameFlowManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    // --- INITIALISATION ---
+
     // Méthode appelée après le chargement d'une nouvelle scène
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -102,33 +106,33 @@ public class GameFlowManager : MonoBehaviour
             return;
         }
 
-        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
-        if (playerSpawn == null)
+        GameObject spawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
+        if (spawn == null)
         {
             Debug.LogError("PlayerSpawn non trouvé ! Assurez-vous que l'objet a le tag 'PlayerSpawn'.");
             return;
         }
 
+        playerSpawn = spawn.transform;
+
         // Réinitialise le timer de la boucle
         loopTimer = loopDuration;
     }
 
-    // Crée une nouvelle instance du joueur et met à jour la référence
-    // private void InstantiatePlayer()
-    // {
-    //     // Détruit l'ancienne instance si elle existe pour éviter les doublons
-    //     if (currentPlayerInstance != null)
-    //     {
-    //         Destroy(currentPlayerInstance);
-    //     }
+    // --- LOOP LOGIC ---
+    private void HandleLoopTimer()
+    {
+        loopTimer -= Time.deltaTime;
 
-    //     // Instancie le nouveau joueur au point de respawn
-    //     currentPlayerInstance = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
-    // }
+        if (loopTimer <= 0f)
+        {
+            RestartLoop();
+        }
+    }
 
     public void RestartLoop()
     {
-        Debug.Log("Nouvelle boucle");
+        Debug.Log("Nouvelle boucle #{loopCount +1}");
 
         // Sauvegarde l'état actuel avant de le réinitialiser
         // pour que les changements de la boucle précédente soient mémorisés.
@@ -138,15 +142,20 @@ public class GameFlowManager : MonoBehaviour
         // l'état persistant et préparer la prochaine boucle.
         PersistentState.Instance.ClearState();
 
-        // Réinitialise seulement le joueur
-        player.transform.position = playerSpawn.position;
+        // 3. Replace le joueur au spawn
+        if (player != null && playerSpawn != null)
+        {
+            player.transform.position = playerSpawn.position;
+        }
 
+         // 4. Reset du timer
         loopTimer = loopDuration;
+        loopCount++;
 
         // Réapplique l’état persistant aux objets de la scène
         PersistentState.Instance.ApplyStateToScene();
         
-        // 🔔 Prévenir les autres scripts
+        // 🔔 Prévenir les autres scripts (UI, son, effets visuels)
         OnLoopRestart?.Invoke();
     }
 
@@ -178,24 +187,6 @@ public class GameFlowManager : MonoBehaviour
             }
             // Ici, vous pourriez aussi gérer d'autres actions, comme un son ou un effet visuel.
         }
-
-        // // On vérifie si l'objet qui est entré dans le trigger est le joueur
-        // if (triggeredObject.CompareTag("Player"))
-        // {
-        //     // Si c'est le joueur, on le réinitialise (déclencher la boucle)
-        //     RestartLoop();
-        // }
-        // else if (triggeredObject.CompareTag("Crate")) // Supposons que votre caisse a le tag "Crate"
-        // {
-        //     // Si c'est la caisse, on applique la logique de persistance (si nécessaire)
-        //     // Par exemple, on peut sauvegarder sa position pour la prochaine boucle
-        //     PersistentState.Instance.SavePosition(triggeredObject, triggeredObject.transform.position);
-
-        //     // On peut aussi déclencher l'action du TriggerObject ici,
-        //     // comme l'étirement du pont
-        //     // triggeredObject.GetComponent<StrechingObject>()?.ChangeStretch();
-        //     Debug.Log("Une caisse a activé le déclencheur !");
-        // }
     }
 
     /// <summary>

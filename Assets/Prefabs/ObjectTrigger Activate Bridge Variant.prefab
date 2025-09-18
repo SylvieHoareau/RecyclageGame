@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3308417447151803171
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: HandleTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameFlowManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameFlowManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127376317879766224, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_Name
+      value: ObjectTrigger Activate Bridge Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7127376317879766224, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1226589785263200527}
+  m_SourcePrefab: {fileID: 100100000, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+--- !u!1 &5692649830303750131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7127376317879766224, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+  m_PrefabInstance: {fileID: 3308417447151803171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1226589785263200527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692649830303750131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed250da26e697d242a105fa709b6be90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameFlowManager, Assembly-CSharp
+        m_MethodName: HandleTrigger
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
