@@ -33,28 +33,39 @@ public class InventoryUI : MonoBehaviour
         // Crée un slot pour chaque item
         foreach (var item in Inventory.Instance.GetAllItems())
         {
-            GameObject slot = Instantiate(itemSlotPrefab, contentParent);
-            
-            // Ajout de vérifications pour éviter les erreurs
-            Transform itemNameTransform = slot.transform.Find("ItemName");
-            if (itemNameTransform != null)
+            GameObject slotObject = Instantiate(itemSlotPrefab, contentParent);
+            InventorySlotUI slotUI = slotObject.GetComponent<InventorySlotUI>();
+
+            // On vérifie que le composant est bien présent
+            if (slotUI != null)
             {
-                TMP_Text itemNameText = itemNameTransform.GetComponent<TMP_Text>();
-                if (itemNameText != null)
-                {
-                    itemNameText.text = item.itemName;
-                }
+                slotUI.UpdateSlot(item.itemSprite, item.itemName);
+            }
+            else
+            {
+                Debug.LogError("Le prefab 'itemSlotPrefab' n'a pas le script 'InventorySlotUI' !");
             }
 
-            Transform itemImageTransform = slot.transform.Find("ItemImage");
-            if (itemImageTransform != null)
-            {
-                Image itemImage = itemImageTransform.GetComponent<Image>();
-                if (itemImage != null)
-                {
-                    itemImage.sprite = item.itemSprite;
-                }
-            }
+            // Ajout de vérifications pour éviter les erreurs
+            // Transform itemNameTransform = slot.transform.Find("ItemName");
+            // if (itemNameTransform != null)
+            // {
+            //     TMP_Text itemNameText = itemNameTransform.GetComponent<TMP_Text>();
+            //     if (itemNameText != null)
+            //     {
+            //         itemNameText.text = item.itemName;
+            //     }
+            // }
+
+            // Transform itemImageTransform = slot.transform.Find("ItemImage");
+            // if (itemImageTransform != null)
+            // {
+            //     Image itemImage = itemImageTransform.GetComponent<Image>();
+            //     if (itemImage != null)
+            //     {
+            //         itemImage.sprite = item.itemSprite;
+            //     }
+            // }
         }
     }
 }
