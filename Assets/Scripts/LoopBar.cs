@@ -6,7 +6,7 @@ using System.Collections;
 public class LoopBar : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private Image loopFill;
+    // [SerializeField] private Image loopFill;
     [SerializeField] private Slider loopSlider; //  barre style HP
     [SerializeField] private TextMeshProUGUI loopTimerText; // pour 00:00
     [SerializeField] private TextMeshProUGUI loopCounterText; // pour Boucle 1, Boucle 2...
@@ -43,11 +43,11 @@ public class LoopBar : MonoBehaviour
         float loopDuration = GameFlowManager.Instance.loopDuration;
 
         // --- Image Fill (style radial ou horizontal)
-        if (loopFill != null)
-        {
-            float fillAmount = Mathf.Clamp01(currentLoopTime / loopDuration);
-            loopFill.fillAmount = fillAmount;
-        }
+        // if (loopFill != null)
+        // {
+        //     float fillAmount = Mathf.Clamp01(currentLoopTime / loopDuration);
+        //     loopFill.fillAmount = fillAmount;
+        // }
 
         // --- Slider (style barre de vie)
         if (loopSlider != null)

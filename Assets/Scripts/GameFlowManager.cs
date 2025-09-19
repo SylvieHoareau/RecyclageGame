@@ -109,14 +109,6 @@ public class GameFlowManager : MonoBehaviour
 
     private void InitializeLevel()
     {
-        // Cherche le joueur dans la scène actuelle et le point de spawn
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-        {
-            Debug.LogError("Player non trouvé ! Assurez-vous que l'objet a le tag 'Player'.");
-            return;
-        }
-
         // Cherche le point de spawn
         GameObject spawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
         if (spawn == null)
@@ -126,6 +118,31 @@ public class GameFlowManager : MonoBehaviour
         }
 
         playerSpawn = spawn.transform;
+
+        // Cherche le joueur dans la scène actuelle et le point de spawn
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        // Si le joueur n'est pas déjà dans la scène, on l'instancie
+        if (player == null)
+        {
+            if (playerPrefab == null)
+            {
+                Debug.LogError("PlayerPrefab n'est pas assigné dans l'inspecteur !");
+                return;
+            }
+
+            // Instancie le joueur à la position de spawn
+            player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
+            Debug.Log("Player non trouvé ! Assurez-vous que l'objet a le tag 'Player'.");
+        }
+        else
+        {
+            // Si le joueur existe déjà (car il est persistant), on le déplace au nouveau point de spawn.
+            player.transform.position = playerSpawn.position;
+            Debug.Log("Joueur persistant déplacé au point de spawn de la nouvelle scène.");
+        }
+
+        
 
         // Réinitialise le timer de la boucle
         loopTimer = loopDuration;
@@ -209,18 +226,15 @@ public class GameFlowManager : MonoBehaviour
 
     // --- TRIGGERS & INTERACTIONS ---
     // Méthode pour gérer l'interaction avec le TriggerObject
-    public void HandleTrigger(GameObject triggeredObject)
+
+    public void HandleCrateTrigger()
     {
-        // . On vérifie si l'objet qui est entré dans le trigger est la caisse.
-        if (triggeredObject.CompareTag("Crate"))
+        // Trouve l'objet Bridge avec le script StrechingObject
+        // Ce code ne sera appelé que via le spawner trigger du Level 1
+        var bridge = FindObjectOfType<StrechingObject>();
+        if (bridge != null)
         {
-            // Trouve l'objet Bridge avec le script StrechingObject.
-            var bridge = FindObjectOfType<StrechingObject>();
-            if (bridge != null)
-            {
-                bridge.ChangeStretch();
-            }
-            // Ici, vous pourriez aussi gérer d'autres actions, comme un son ou un effet visuel.
+            bridge.ChangeStretch();
         }
     }
 
@@ -304,31 +318,8 @@ public class GameFlowManager : MonoBehaviour
             // Tu peux ajouter ici des feedbacks pour le joueur, comme un message à l'écran
         }
 
-        if (sceneName == "Level1")
-        {
-            // Fait apparaître les fleurs
-            if (spawnerToTrigger != null)
-            {
-                spawnerToTrigger.SpawnAll();
-            }
-        }
-        else if (sceneName == "Level2")
-        {
-            // Pour le niveau 2, la condition de victoire est peut-être de collecter
-            // un certain nombre d'objets, ou simplement d'atteindre le trigger de fin.
-            // La logique actuelle est bonne si l'objectif est d'atteindre le trigger.
-            // Si vous voulez qu'il y ait une condition de collecte, il faudrait l'ajouter ici.
-            // Par exemple :
-            if (Inventory.Instance.GetAllItems().Count >= requiredCollectibles)
-            {
-                Debug.Log("Objectif de collecte atteint !");
-                EndLevel(); // Ou une autre action de fin de niveau
-                return;
-            }
-        }
-
         // On appelle la fonction de fin de niveau après un court délai pour laisser l'animation des fleurs se faire
-        Invoke("EndLevel", 2f);
+        // Invoke("EndLevel", 2f);
     }
 
     /// <summary>
