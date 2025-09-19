@@ -271,10 +271,36 @@ public class GameFlowManager : MonoBehaviour
         Debug.Log("Niveau terminé !");
 
         // (Optionnel) Reset de l'inventaire pour le prochain niveau
-        Inventory.Instance.ClearInventory();
+        if (Inventory.Instance == null)
+        {
+            Debug.LogError("Inventory.Instance est NULL !");
+        }
+        else
+        {
+            Inventory.Instance.ClearInventory();
+        }
+
+        // Inventory.Instance.ClearInventory();
 
         // Réinitialise l'état persistant avant de changer de scène pour éviter les bugs
-        PersistentState.Instance.ClearState();
-        SceneManager.LoadScene(nextSceneName);
+        if (PersistentState.Instance == null)
+        {
+            Debug.LogError("PersistentState.Instance est NULL !");
+        }
+        else
+        {
+            PersistentState.Instance.ClearState();
+        }
+        // PersistentState.Instance.ClearState();
+
+        if (string.IsNullOrEmpty(nextSceneName))
+        {
+            Debug.LogError("nextSceneName est vide !");
+        }
+        else
+        {
+            SceneManager.LoadScene(nextSceneName);
+        }
+        // SceneManager.LoadScene(nextSceneName);
     }
 }
