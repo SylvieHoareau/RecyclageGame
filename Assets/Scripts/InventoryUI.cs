@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // si tu utilises TextMeshPro
+using TMPro; // TextMeshPro
 
 public class InventoryUI : MonoBehaviour
 {

@@ -90,7 +90,7 @@ public class LoopBar : MonoBehaviour
         // 2. 💡 Déclencher un flash visuel (coroutine)
         StartCoroutine(FlashScreen());
     }
-    gt
+
     private IEnumerator FlashScreen()
     {
         // Crée un overlay blanc temporaire

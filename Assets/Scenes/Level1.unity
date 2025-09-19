@@ -4320,7 +4320,7 @@ PrefabInstance:
     - target: {fileID: 5068082901424961311, guid: 75c0ac30233e23730bf7ea53bb1ec9a2, type: 3}
       propertyPath: itemSlotPrefab
       value: 
-      objectReference: {fileID: 1946999453}
+      objectReference: {fileID: 8723164428480453508, guid: 768f38e0f38addf408b6d989a75ae2e4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11466,11 +11466,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20324df58243abfb2b02a182f5210fe5, type: 3}
---- !u!1 &1946999453 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7260434515577142798, guid: 20324df58243abfb2b02a182f5210fe5, type: 3}
-  m_PrefabInstance: {fileID: 1946999452}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1946999454 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2209800608498232472, guid: 20324df58243abfb2b02a182f5210fe5, type: 3}
@@ -11807,7 +11802,12 @@ MonoBehaviour:
   - {fileID: 510086294}
   - {fileID: 1063756628}
   - {fileID: 785318462}
-  collectiblesPrefabs: []
+  collectiblesPrefabs:
+  - {fileID: 7506175246151643749}
+  - {fileID: 990792195}
+  - {fileID: 510086294}
+  - {fileID: 1063756628}
+  - {fileID: 785318462}
   amount: 5
 --- !u!1 &2046684086
 GameObject:

@@ -38,13 +38,13 @@ public class SpawnerObject : MonoBehaviour
     //         Debug.Log($"✅ Spawn de {prefab.name} en {pos}");
     //     }
     // }
-    
+
     // Pour afficher tous les spawn objects en une seule fois
     public void SpawnAll()
     {
         if (prefabsToSpawn == null || prefabsToSpawn.Length == 0)
         {
-            Debug.LogWarning("⚠ Aucun prefab assigné à spawn !");
+            Debug.LogWarning("Aucun prefab assigné à spawn !");
             return;
         }
 
@@ -53,6 +53,11 @@ public class SpawnerObject : MonoBehaviour
             Vector3 pos = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
             Instantiate(prefab, pos, Quaternion.identity);
             Debug.Log($"✅ Spawn de {prefab.name}");
+        }
+
+        foreach (GameObject gameObject in collectiblesPrefabs)
+        {
+            gameObject.SetActive(true);
         }
     }
 
