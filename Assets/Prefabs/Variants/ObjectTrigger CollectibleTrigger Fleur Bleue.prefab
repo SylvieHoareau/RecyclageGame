@@ -10,11 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4258110287334209579, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_Color.b
-      value: 0.27792615
+      value: 0.16342616
       objectReference: {fileID: 0}
     - target: {fileID: 4258110287334209579, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_Color.g
-      value: 0.23921567
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258110287334209579, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_LocalPosition.x
@@ -102,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7127376317879766224, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_Name
-      value: ObjectTrigger CollectibleTrigger Fleur Rouge
+      value: ObjectTrigger CollectibleTrigger Fleur Bleue
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

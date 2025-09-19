@@ -9,12 +9,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4258110287334209579, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8994238325188327687, guid: bb5aaf16c71d26a4bafcf1f7fe280e06, type: 3}
+    - target: {fileID: 4258110287334209579, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_Color.b
-      value: 0.27792615
+      value: 0.97241956
       objectReference: {fileID: 0}
     - target: {fileID: 4258110287334209579, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_Color.g
-      value: 0.23921567
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258110287334209579, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9669811
       objectReference: {fileID: 0}
     - target: {fileID: 4998552003620689484, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5322972422591253603, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_Name
-      value: Flower
+      value: Carot
       objectReference: {fileID: 0}
     - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.size
@@ -102,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7127376317879766224, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_Name
-      value: ObjectTrigger CollectibleTrigger Fleur Rouge
+      value: ObjectTrigger CollectibleTrigger Carot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9425,6 +9425,10 @@ PrefabInstance:
       value: 0.0595595
       objectReference: {fileID: 0}
     - target: {fileID: 1309196594897079119, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
+      propertyPath: m_Name
+      value: ObjectTrigger CollectibleTrigger Navet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309196594897079119, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -9438,71 +9442,91 @@ PrefabInstance:
       objectReference: {fileID: 1604150305}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
       propertyPath: collectiblesPrefabs.Array.size
-      value: 18
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[3]'
+      propertyPath: 'collectiblesPrefabs.Array.data[0]'
       value: 
       objectReference: {fileID: 1101049928}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[4]'
+      propertyPath: 'collectiblesPrefabs.Array.data[1]'
       value: 
       objectReference: {fileID: 1278880433}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[5]'
+      propertyPath: 'collectiblesPrefabs.Array.data[2]'
       value: 
       objectReference: {fileID: 1021311430}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[6]'
+      propertyPath: 'collectiblesPrefabs.Array.data[3]'
       value: 
       objectReference: {fileID: 332461164}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[7]'
+      propertyPath: 'collectiblesPrefabs.Array.data[4]'
       value: 
       objectReference: {fileID: 187745514}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[8]'
+      propertyPath: 'collectiblesPrefabs.Array.data[5]'
       value: 
       objectReference: {fileID: 895007165}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[9]'
+      propertyPath: 'collectiblesPrefabs.Array.data[6]'
       value: 
       objectReference: {fileID: 1964726143}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[10]'
+      propertyPath: 'collectiblesPrefabs.Array.data[7]'
       value: 
       objectReference: {fileID: 351371561}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[11]'
+      propertyPath: 'collectiblesPrefabs.Array.data[8]'
       value: 
       objectReference: {fileID: 1534899521}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[12]'
+      propertyPath: 'collectiblesPrefabs.Array.data[9]'
       value: 
       objectReference: {fileID: 454783746}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[13]'
+      propertyPath: 'collectiblesPrefabs.Array.data[10]'
       value: 
       objectReference: {fileID: 2125723399}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[14]'
+      propertyPath: 'collectiblesPrefabs.Array.data[11]'
       value: 
       objectReference: {fileID: 36285818}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[15]'
+      propertyPath: 'collectiblesPrefabs.Array.data[12]'
       value: 
       objectReference: {fileID: 1337062082}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
-      propertyPath: 'collectiblesPrefabs.Array.data[16]'
+      propertyPath: 'collectiblesPrefabs.Array.data[13]'
       value: 
       objectReference: {fileID: 716828309}
+    - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
+      propertyPath: 'collectiblesPrefabs.Array.data[14]'
+      value: 
+      objectReference: {fileID: 1208388628}
+    - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
+      propertyPath: 'collectiblesPrefabs.Array.data[15]'
+      value: 
+      objectReference: {fileID: 1208388628}
+    - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
+      propertyPath: 'collectiblesPrefabs.Array.data[16]'
+      value: 
+      objectReference: {fileID: 1208388628}
     - target: {fileID: 2176851993061997118, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
       propertyPath: 'collectiblesPrefabs.Array.data[17]'
       value: 
       objectReference: {fileID: 1208388628}
     - target: {fileID: 4901180840935455083, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
+      propertyPath: m_Name
+      value: ObjectTrigger CollectibleTrigger Carot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901180840935455083, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4945589186035094332, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
+      propertyPath: m_Name
+      value: ObjectTrigger CollectibleTrigger Chou
       objectReference: {fileID: 0}
     - target: {fileID: 4945589186035094332, guid: 5272966b46d74e445b5dd7dd711218d2, type: 3}
       propertyPath: m_IsActive
@@ -10300,6 +10324,10 @@ PrefabInstance:
     - target: {fileID: 9094146310796468378, guid: cc4eaa733ddcc494cb414c900b77aadb, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094146310796468378, guid: cc4eaa733ddcc494cb414c900b77aadb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

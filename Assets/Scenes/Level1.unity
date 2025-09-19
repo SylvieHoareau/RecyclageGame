@@ -12670,10 +12670,7 @@ MonoBehaviour:
   - {fileID: 1821292870}
   - {fileID: 461002499}
   collectiblesPrefabs:
-  - {fileID: 136755804}
-  - {fileID: 136755803}
-  - {fileID: 136755802}
-  - {fileID: 136755802}
+  - {fileID: 7176130381053389094, guid: c90ffdb7f8a24d27989a1079961ee80c, type: 3}
   amount: 5
 --- !u!1001 &2038464997
 PrefabInstance:

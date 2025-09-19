@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         // On utilise Update pour les mises à jour de l'Animator car elles ne sont pas liées à la physique
         // et sont donc plus fluides si elles sont exécutées à chaque frame.
-        
+
         // Gère la direction du sprite en fonction de l'input
         if (moveInput.x > 0)
         {
@@ -58,23 +58,26 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
+        
+        // Met à jour la vitesse de l'Animator pour la transition d'Idle à Move
+        animator.SetFloat("MoveSpeed", moveInput.magnitude);
+
+        // Met à jour les paramètres de l'Animator pour le Blend Tree
+        // Ces valeurs définissent la direction du mouvement
+        animator.SetFloat("Horizontal", moveInput.x);
+        animator.SetFloat("Vertical", moveInput.y);
     }
 
     void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
 
-        // 1. On vérifie si la référence `animator` n'est pas nulle.
-        // 2. Si elle existe, on met à jour la vitesse de l'animation.
-        //    Sinon, on ne fait rien, ce qui évite l'erreur.
-        if (animator != null)
+         // Si le mouvement est enclenché
+        if (moveInput != Vector2.zero)
         {
-            // `moveInput.magnitude` donne la longueur du vecteur, parfaite pour la vitesse.
-            animator.SetFloat("MoveSpeed", moveInput.magnitude);
+            // Mettez à jour les paramètres de direction de l'Animator
+            animator.SetFloat("Horizontal", moveInput.x);
+            animator.SetFloat("Vertical", moveInput.y);
         }
-
-        // Met à jour les paramètres de l'Animator pour le Blend Tree
-        animator.SetFloat("Horizontal", moveInput.x);
-        animator.SetFloat("Vertical", moveInput.y);
     }
 }

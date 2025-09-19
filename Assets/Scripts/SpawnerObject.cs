@@ -33,22 +33,22 @@ public class SpawnerObject : MonoBehaviour
     /// <summary>
     /// Spawn un nombre défini d’objets (aléatoires parmi la liste active).
     /// </summary>
-    public void Spawn()
-    {
-        if (prefabsToSpawn == null || prefabsToSpawn.Length == 0)
-        {
-            Debug.LogWarning("Aucun prefab assigné à spawn !");
-            return;
-        }
+    // public void Spawn()
+    // {
+    //     if (prefabsToSpawn == null || prefabsToSpawn.Length == 0)
+    //     {
+    //         Debug.LogWarning("Aucun prefab assigné à spawn !");
+    //         return;
+    //     }
 
-        for (int i = 0; i < amount; i++)
-        {
-            GameObject prefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Length)];
-            Vector3 pos = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-            Instantiate(prefab, pos, Quaternion.identity);
-            Debug.Log($"Spawn de {prefab.name} en {pos}");
-        }
-    }
+    //     for (int i = 0; i < amount; i++)
+    //     {
+    //         GameObject prefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Length)];
+    //         Vector3 pos = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+    //         Instantiate(prefab, pos, Quaternion.identity);
+    //         Debug.Log($"Spawn de {prefab.name} en {pos}");
+    //     }
+    // }
 
     // Pour afficher tous les spawn objects en une seule fois
     public void SpawnAll()
@@ -63,7 +63,11 @@ public class SpawnerObject : MonoBehaviour
         foreach (GameObject prefab in prefabsToSpawn)
         {
             Vector3 pos = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-            Instantiate(prefab, pos, Quaternion.identity);
+            // Instancie le prefab et stocke la référence dans une nouvelle variable
+            GameObject newObject = Instantiate(prefab, pos, Quaternion.identity);
+            
+            // Active le nouvel objet
+            newObject.SetActive(true);
             Debug.Log($"✅ Spawn de {prefab.name}");
         }
     }
