@@ -4,8 +4,23 @@ using TMPro; // TextMeshPro
 
 public class InventoryUI : MonoBehaviour
 {
+    // Référence statique pour le Singleton
+    public static InventoryUI Instance;
     public Transform contentParent; // le Panel où sont instanciés les items
     public GameObject itemSlotPrefab; // prefab créé à l'étape 1
+
+    void Awake()
+    {
+        // On s'assure qu'il n'y a qu'une seule instance
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void RefreshInventory()
     {
@@ -19,8 +34,28 @@ public class InventoryUI : MonoBehaviour
         foreach (var item in Inventory.Instance.GetAllItems())
         {
             GameObject slot = Instantiate(itemSlotPrefab, contentParent);
-            slot.transform.Find("ItemName").GetComponent<TMP_Text>().text = item.itemName;
-            slot.transform.Find("ItemImage").GetComponent<Image>().sprite = item.itemSprite;
+            
+            // Ajout de vérifications pour éviter les erreurs
+            Transform itemNameTransform = slot.transform.Find("ItemName");
+            if (itemNameTransform != null)
+            {
+                TMP_Text itemNameText = itemNameTransform.GetComponent<TMP_Text>();
+                if (itemNameText != null)
+                {
+                    itemNameText.text = item.itemName;
+                }
+            }
+
+            Transform itemImageTransform = slot.transform.Find("ItemImage");
+            if (itemImageTransform != null)
+            {
+                Image itemImage = itemImageTransform.GetComponent<Image>();
+                if (itemImage != null)
+                {
+                    itemImage.sprite = item.itemSprite;
+                }
+            }
         }
     }
 }
+

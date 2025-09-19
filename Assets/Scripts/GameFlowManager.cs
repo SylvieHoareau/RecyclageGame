@@ -20,8 +20,13 @@ public class GameFlowManager : MonoBehaviour
 
     [Header("Progression du Niveau")]
     [SerializeField] private SpawnerObject spawnerToTrigger;
-    [SerializeField] private GameObject flowersPrefab; // La fleur que nous allons instancier
-    [SerializeField] private float flowersToSpawn = 5; // Nombre de fleurs à faire apparaître
+    // [SerializeField] private GameObject flowersPrefab; // La fleur que nous allons instancier
+    // [SerializeField] private float flowersToSpawn = 5; // Nombre de fleurs à faire apparaître
+
+    // Variables pour les objectifs de collecte
+    [Header("Objectifs de collecte")]
+    [SerializeField] private string[] requiredFlowers; // Noms des fleurs requises (ex: "FleurRouge", "FleurBleue")
+    [SerializeField] private string[] requiredVegetables; // Noms des légumes requis (ex: "Carrot", "Cabbage", "Turnip")
 
     private bool levelCompleted = false; // Pour éviter de déclencher l'événement plusieurs fois
 
@@ -179,6 +184,29 @@ public class GameFlowManager : MonoBehaviour
         }
     }
 
+    // Méthode pour vérifier si le joueur a tous les objets requis
+    private bool CheckIfObjectivesMet(string[] requiredItems)
+    {
+        // Si le tableau d'items requis est vide, l'objectif est considéré comme rempli
+        if (requiredItems.Length == 0)
+        {
+            return true;
+        }
+
+        // Vérifie si le joueur a tous les items dans son inventaire
+        foreach (string itemName in requiredItems)
+        {
+            if (!Inventory.Instance.HasItem(itemName))
+            {
+                Debug.Log($"Objectif non atteint : l'item '{itemName}' est manquant.");
+                return false; // Manque un item, donc retourne faux
+            }
+        }
+
+        // Tous les items requis sont présents
+        return true;
+    }
+
     // --- TRIGGERS & INTERACTIONS ---
     // Méthode pour gérer l'interaction avec le TriggerObject
     public void HandleTrigger(GameObject triggeredObject)
@@ -215,7 +243,7 @@ public class GameFlowManager : MonoBehaviour
             Destroy(collectible.gameObject);
         }
 
-        // Actualise l'UI
+        // Actualise l'UI en utilisant le singleton
         InventoryUI inventoryUI = FindObjectOfType<InventoryUI>();
         if (inventoryUI != null)
         {
@@ -238,25 +266,65 @@ public class GameFlowManager : MonoBehaviour
     {
         // On s'assure que la logique ne s'exécute qu'une seule fois
         if (levelCompleted) return;
-        levelCompleted = true;
+        // levelCompleted = true;
 
         Debug.Log("Le joueur a atteint le point de fin de niveau !");
 
-        // Fait apparaître des fleurs à la position du spawner
-        // if (spawnerToTrigger != null && flowersPrefab != null)
-        // {
-        //     for (int i = 0; i < flowersToSpawn; i++)
-        //     {
-        //         // Ici, on instancie les fleurs. On pourrait ajouter une légère variance
-        //         Vector3 spawnPosition = spawnerToTrigger.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-        //         Instantiate(flowersPrefab, spawnPosition, Quaternion.identity);
-        //     }
-        // }
+        // Utilise le nom de la scène pour adapter la logique
+        string sceneName = SceneManager.GetActiveScene().name;
+        string[] objectives = new string[0]; // Tableau vide par défaut
 
-        // Fait apparaître tous les prefabs configurés dans le spawner
-        if (spawnerToTrigger != null)
+        if (sceneName == "Level1")
         {
-            spawnerToTrigger.SpawnAll();
+            objectives = requiredFlowers;
+        }
+        else if (sceneName == "Level2")
+        {
+            objectives = requiredVegetables;
+        }
+
+        // Vérifie si les objectifs de collecte sont atteints
+        if (CheckIfObjectivesMet(objectives))
+        {
+            Debug.Log("Objectifs de collecte atteints ! Fin du niveau.");
+            levelCompleted = true; // Empêche les appels multiples
+
+            // Fait apparaître des fleurs pour le niveau 1
+            if (sceneName == "Level1" && spawnerToTrigger != null)
+            {
+                spawnerToTrigger.SpawnAll();
+            }
+
+            // On appelle la fonction de fin de niveau après un court délai pour laisser l'animation se faire
+            Invoke("EndLevel", 2f);
+        }
+        else
+        {
+            Debug.LogWarning("Objectifs de collecte non atteints. Le niveau ne peut pas se terminer.");
+            // Tu peux ajouter ici des feedbacks pour le joueur, comme un message à l'écran
+        }
+
+        if (sceneName == "Level1")
+        {
+            // Fait apparaître les fleurs
+            if (spawnerToTrigger != null)
+            {
+                spawnerToTrigger.SpawnAll();
+            }
+        }
+        else if (sceneName == "Level2")
+        {
+            // Pour le niveau 2, la condition de victoire est peut-être de collecter
+            // un certain nombre d'objets, ou simplement d'atteindre le trigger de fin.
+            // La logique actuelle est bonne si l'objectif est d'atteindre le trigger.
+            // Si vous voulez qu'il y ait une condition de collecte, il faudrait l'ajouter ici.
+            // Par exemple :
+            if (Inventory.Instance.GetAllItems().Count >= requiredCollectibles)
+            {
+                Debug.Log("Objectif de collecte atteint !");
+                EndLevel(); // Ou une autre action de fin de niveau
+                return;
+            }
         }
 
         // On appelle la fonction de fin de niveau après un court délai pour laisser l'animation des fleurs se faire
