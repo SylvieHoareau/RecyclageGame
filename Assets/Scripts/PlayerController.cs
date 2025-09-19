@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveInput;
 
-    [SerializeField] private float speed = 50;
-    [SerializeField] private float acceleration = 20;
+    [SerializeField] private float speed = 10;
+    [SerializeField] private float acceleration = 10;
 
     // Appeler en premier avant meme le Start()
     void Awake()

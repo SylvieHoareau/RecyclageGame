@@ -117,6 +117,7 @@ public class GameFlowManager : MonoBehaviour
             return;
         }
 
+        // Met à jour la référence au point de spawn avec celui de la nouvelle scène.
         playerSpawn = spawn.transform;
 
         // Cherche le joueur dans la scène actuelle et le point de spawn
@@ -141,8 +142,6 @@ public class GameFlowManager : MonoBehaviour
             player.transform.position = playerSpawn.position;
             Debug.Log("Joueur persistant déplacé au point de spawn de la nouvelle scène.");
         }
-
-        
 
         // Réinitialise le timer de la boucle
         loopTimer = loopDuration;

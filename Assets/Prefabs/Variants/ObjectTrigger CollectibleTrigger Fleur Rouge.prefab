@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5322972422591253603, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
+      propertyPath: m_Name
+      value: Flower
+      objectReference: {fileID: 0}
     - target: {fileID: 7122113956635077704, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -90,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7127376317879766224, guid: 83d2095e26ac2c740b4f745e487fd590, type: 3}
       propertyPath: m_Name
-      value: ObjectTrigger Activate Bridge Variant 1
+      value: ObjectTrigger CollectibleTrigger Fleur Rouge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

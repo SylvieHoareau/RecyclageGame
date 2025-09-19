@@ -46,7 +46,7 @@ public class SpawnerObject : MonoBehaviour
             GameObject prefab = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Length)];
             Vector3 pos = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
             Instantiate(prefab, pos, Quaternion.identity);
-            Debug.Log($"✅ Spawn de {prefab.name} en {pos}");
+            Debug.Log($"Spawn de {prefab.name} en {pos}");
         }
     }
 
@@ -59,21 +59,12 @@ public class SpawnerObject : MonoBehaviour
             return;
         }
 
+        // Boucle à travers les prefabs et les instancie
         foreach (GameObject prefab in prefabsToSpawn)
         {
             Vector3 pos = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
             Instantiate(prefab, pos, Quaternion.identity);
             Debug.Log($"✅ Spawn de {prefab.name}");
-        }
-
-        foreach (GameObject gameObject in flowersPrefabs)
-        {
-            gameObject.SetActive(true);
-        }
-
-        foreach (GameObject gameObject in collectiblesPrefabs)
-        {
-            gameObject.SetActive(true);
         }
     }
 
