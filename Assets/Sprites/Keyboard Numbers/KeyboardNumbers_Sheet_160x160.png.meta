@@ -138,6 +138,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -484,7 +510,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KeyboardNumbers_Sheet_160x160_0: -6207943580611744930
+      KeyboardNumbers_Sheet_160x160_1: 997227265387135438
+      KeyboardNumbers_Sheet_160x160_10: 3737275902687394992
+      KeyboardNumbers_Sheet_160x160_11: 8449195699232105808
+      KeyboardNumbers_Sheet_160x160_12: -7957084904379577094
+      KeyboardNumbers_Sheet_160x160_13: -2815573822923016905
+      KeyboardNumbers_Sheet_160x160_14: -6363849329331909873
+      KeyboardNumbers_Sheet_160x160_2: 39192061808530732
+      KeyboardNumbers_Sheet_160x160_3: 6277760477364242071
+      KeyboardNumbers_Sheet_160x160_4: 3008409870019824757
+      KeyboardNumbers_Sheet_160x160_5: 3741916545229238312
+      KeyboardNumbers_Sheet_160x160_6: 8906816001539252693
+      KeyboardNumbers_Sheet_160x160_7: -435606571707324868
+      KeyboardNumbers_Sheet_160x160_8: 8282336339661217855
+      KeyboardNumbers_Sheet_160x160_9: -2967841198338595343
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

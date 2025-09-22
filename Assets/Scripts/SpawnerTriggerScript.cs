@@ -13,6 +13,9 @@ public class SpawnerTriggerScript : MonoBehaviour
 
         if (triggered) return;
 
+        // Affiche la boîte de dialogue
+        FindObjectOfType<TutorialManager>()?.OnSpawnerActivated();
+
         // Vérifie si c'est le joueur
         if (other.CompareTag("Player"))
         {

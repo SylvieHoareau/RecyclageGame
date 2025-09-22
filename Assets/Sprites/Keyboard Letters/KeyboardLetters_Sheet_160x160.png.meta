@@ -171,6 +171,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -759,7 +785,33 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KeyboardLetters_Sheet_160x160_0: -5482056722184411731
+      KeyboardLetters_Sheet_160x160_1: -3391106166730444422
+      KeyboardLetters_Sheet_160x160_10: 7866443405193386802
+      KeyboardLetters_Sheet_160x160_11: 4669481697164022545
+      KeyboardLetters_Sheet_160x160_12: -2360746048585981997
+      KeyboardLetters_Sheet_160x160_13: -890434879757523621
+      KeyboardLetters_Sheet_160x160_14: 5283272852477821203
+      KeyboardLetters_Sheet_160x160_15: -8041736475128939230
+      KeyboardLetters_Sheet_160x160_16: -1032830487170934680
+      KeyboardLetters_Sheet_160x160_17: -2398319361739909751
+      KeyboardLetters_Sheet_160x160_18: -4776681876239501152
+      KeyboardLetters_Sheet_160x160_19: 1795343592411753309
+      KeyboardLetters_Sheet_160x160_2: 4885255516461752576
+      KeyboardLetters_Sheet_160x160_20: -5705682687816995018
+      KeyboardLetters_Sheet_160x160_21: -4693320892450936736
+      KeyboardLetters_Sheet_160x160_22: 1411117826342521316
+      KeyboardLetters_Sheet_160x160_23: -1045902667317371779
+      KeyboardLetters_Sheet_160x160_24: 5685135020303539149
+      KeyboardLetters_Sheet_160x160_25: -158444018663415833
+      KeyboardLetters_Sheet_160x160_3: -4765197147337546380
+      KeyboardLetters_Sheet_160x160_4: 2001381144399367703
+      KeyboardLetters_Sheet_160x160_5: -6840818313068152097
+      KeyboardLetters_Sheet_160x160_6: -565793778822109738
+      KeyboardLetters_Sheet_160x160_7: 1742417477053194462
+      KeyboardLetters_Sheet_160x160_8: -461145937480011171
+      KeyboardLetters_Sheet_160x160_9: -1227179375845196339
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

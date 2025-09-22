@@ -240,6 +240,8 @@ public class GameFlowManager : MonoBehaviour
 
     public void HandleCrateTrigger()
     {
+        // AFfiche une boîte de dialogue
+        FindObjectOfType<TutorialManager>()?.OnCratePlaced();
         // Trouve l'objet Bridge avec le script StrechingObject
         // Ce code ne sera appelé que via le spawner trigger du Level 1
         var bridge = FindObjectOfType<StrechingObject>();

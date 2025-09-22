@@ -138,6 +138,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -484,7 +510,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KeyboardNumbers_Sheet_80x80_0: 7433908935980241159
+      KeyboardNumbers_Sheet_80x80_1: -6210915503956047647
+      KeyboardNumbers_Sheet_80x80_10: 2352111172771698775
+      KeyboardNumbers_Sheet_80x80_11: -2104276476053424023
+      KeyboardNumbers_Sheet_80x80_12: -8418434205896328540
+      KeyboardNumbers_Sheet_80x80_13: -2662832022276240534
+      KeyboardNumbers_Sheet_80x80_14: 965985056597930058
+      KeyboardNumbers_Sheet_80x80_2: 1078302842567377381
+      KeyboardNumbers_Sheet_80x80_3: 3716800983070323299
+      KeyboardNumbers_Sheet_80x80_4: -4762217558399176867
+      KeyboardNumbers_Sheet_80x80_5: -7004159640268757035
+      KeyboardNumbers_Sheet_80x80_6: -7751038884736710695
+      KeyboardNumbers_Sheet_80x80_7: 8101646920759091539
+      KeyboardNumbers_Sheet_80x80_8: 2486788422507364316
+      KeyboardNumbers_Sheet_80x80_9: -6341769908793808644
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
