@@ -44,6 +44,10 @@ public class GameFlowManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private InventoryUI inventoryUI;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip loopRestartSFX; // son joué au redémarrage de boucle
+    private AudioSource audioSource;
+
     // --- LIFECYCLE ---
     void Awake()
     {
@@ -64,6 +68,8 @@ public class GameFlowManager : MonoBehaviour
     {
         InitializeLevel();
         inventoryUI.RefreshInventory(); // Affiche l'inventaire au départ
+
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -160,7 +166,7 @@ public class GameFlowManager : MonoBehaviour
 
     public void RestartLoop()
     {
-        Debug.Log($"Nouvelle boucle #{loopCount +1}");
+        Debug.Log($"Nouvelle boucle #{loopCount + 1}");
 
         // Sauvegarde l'état actuel avant de le réinitialiser
         // pour que les changements de la boucle précédente soient mémorisés.
@@ -182,9 +188,15 @@ public class GameFlowManager : MonoBehaviour
 
         // Réapplique l’état persistant aux objets de la scène
         PersistentState.Instance.ApplyStateToScene();
-        
+
         // 🔔 Prévenir les autres scripts (UI, son, effets visuels)
         OnLoopRestart?.Invoke();
+        
+        // 🎵 Jouer le son de la boucle
+        if (loopRestartSFX != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(loopRestartSFX);
+        }
     }
 
     // Méthode pour sauvegarder l'état (à la fin de la boucle)

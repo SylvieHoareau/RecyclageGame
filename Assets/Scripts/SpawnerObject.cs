@@ -11,6 +11,10 @@ public class SpawnerObject : MonoBehaviour
     private GameObject[] prefabsToSpawn;      // les prefabs actifs pour cette scène
     [SerializeField] private int amount = 1;
 
+    [Header("Effets visuels")]
+    [SerializeField] private GameObject spawnEffectPrefab; // ton prefab de particules
+
+
     void Start()
     {
         string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
@@ -68,6 +72,14 @@ public class SpawnerObject : MonoBehaviour
             
             // Active le nouvel objet
             newObject.SetActive(true);
+
+            // 🎇 Instancier l’effet de particules au même endroit
+            if (spawnEffectPrefab != null)
+            {
+                GameObject effect = Instantiate(spawnEffectPrefab, pos, Quaternion.identity);
+                Destroy(effect, 2f); // détruit l’effet après 2s
+            }
+
             Debug.Log($"✅ Spawn de {prefab.name}");
         }
     }
