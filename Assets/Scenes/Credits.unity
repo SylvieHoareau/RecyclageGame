@@ -373,7 +373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Graphisues :\nSons :  \nD\xE9veloppeuse : Sylvie HOAREAU"
+  m_text: "Graphismes :\nSons :  \nD\xE9veloppeuse : Sylvie HOAREAU"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -953,6 +953,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694675106}
   m_CullTransparentMesh: 1
+--- !u!1001 &1850098452
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.0199604
+      objectReference: {fileID: 0}
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.7757206
+      objectReference: {fileID: 0}
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.3187141
+      objectReference: {fileID: 0}
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917779614915979720, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959354246955456323, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+      propertyPath: m_Name
+      value: SceneLoader
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+--- !u!114 &1850098453 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3826612796449490239, guid: 9d1b5577367dd794d95eab470307c402, type: 3}
+  m_PrefabInstance: {fileID: 1850098452}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037a1245da7e9cd4ca58e5b6d2fe8db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2139113930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,7 +1104,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2139113933}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1850098453}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2139113933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1082,3 +1162,4 @@ SceneRoots:
   - {fileID: 430791200}
   - {fileID: 636086675}
   - {fileID: 1300672811}
+  - {fileID: 1850098452}

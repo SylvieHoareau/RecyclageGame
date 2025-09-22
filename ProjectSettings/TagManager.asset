@@ -8,6 +8,7 @@ TagManager:
   - Spawner Object
   - Player Spawn
   - PlayerSpawn
+  - Sign Text
   layers:
   - Default
   - TransparentFX
