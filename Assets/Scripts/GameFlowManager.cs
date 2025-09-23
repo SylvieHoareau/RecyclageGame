@@ -127,44 +127,32 @@ public class GameFlowManager : MonoBehaviour
     /// <summary>
     /// Gère la fin d'un niveau et la transition vers le suivant.
     /// </summary>
-    public void EndLevel()
+    public void EndLevel(string sceneToLoad)
     {
-        // 1. Logique de vérification (optionnelle)
-        // Vous pourriez vérifier si des objectifs ont été atteints avant de passer au niveau suivant.
-        // Exemple avec un gestionnaire d'inventaire
-        // if (InventoryManager.Instance != null && !InventoryManager.Instance.HasAllRequiredItems())
-        // {
-        //     Debug.LogWarning("Objectifs non atteints. Impossible de passer au niveau suivant.");
-        //     return; // Sort de la méthode sans rien faire.
-        // }
+         if (string.IsNullOrEmpty(sceneToLoad))
+        {
+            Debug.LogWarning("Le nom de la prochaine scène n'est pas défini !");
+            return;
+        }
 
-        Debug.Log("Niveau terminé. Chargement du prochain niveau.");
+        Debug.Log("Niveau terminé. Chargement du prochain niveau : " + sceneToLoad);
 
-        // 2. Nettoyage et sauvegarde de l'état
-        // Vous devez décider quelles données doivent être nettoyées pour le prochain niveau.
-        // Par exemple, l'inventaire est souvent réinitialisé.
-        // if (InventoryManager.Instance != null)
-        // {
-        //     InventoryManager.Instance.ClearInventory();
-        // }
-
-        // Si vous avez un système de persistance (comme un PersistentState),
-        // il pourrait être nécessaire de le nettoyer aussi, selon votre logique de jeu.
+        // Nettoyage de l'état persistant si nécessaire
         if (PersistentState.Instance != null)
         {
             PersistentState.Instance.ClearState();
         }
 
-        // 3. Changement de scène
-        // On vérifie si un nom de scène est défini pour éviter les erreurs.
-        if (!string.IsNullOrEmpty(nextSceneName))
+        if (!string.IsNullOrEmpty(sceneToLoad))
         {
-            LoadScene(nextSceneName);
+            SceneManager.LoadScene(sceneToLoad);
         }
         else
         {
-            Debug.LogWarning("Le nom de la prochaine scène n'est pas défini dans le GameFlowManager !");
+            Debug.LogWarning("Le nom de la prochaine scène est vide !");
         }
+
+        LoadScene(sceneToLoad);
     }
     
 

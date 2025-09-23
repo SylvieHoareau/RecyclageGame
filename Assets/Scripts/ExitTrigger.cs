@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class ExitTrigger : MonoBehaviour
 {
+    [Tooltip("Nom de la scène suivante à charger.")]
+    [SerializeField] private string nextSceneName;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Joueur a atteint la sortie. Fin du niveau.");
-
 
             // Affiche la boîte de dialogue pour annoncer la sortie au joueur
             // Utilisez FindObjectOfType de manière plus robuste
@@ -21,7 +22,10 @@ public class ExitTrigger : MonoBehaviour
             // La méthode à appeler est 'EndLevel()', pas 'HandleLevelCompletion()'.
             if (GameFlowManager.Instance != null)
             {
-                GameFlowManager.Instance.EndLevel();
+                // On appelle la méthode de fin de niveau et on lui passe le nom de la scène à charger.
+                // Cela permet au GameFlowManager de ne pas se soucier de la prochaine scène,
+                // il se contente d'exécuter l'action.
+                GameFlowManager.Instance.EndLevel(nextSceneName);
             }
             else
             {
