@@ -6,7 +6,8 @@ public class ExitTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Niveau terminé !");
+            Debug.Log("Joueur a atteint la sortie. Fin du niveau.");
+
 
             // Affiche la boîte de dialogue pour annoncer la sortie au joueur
             // Utilisez FindObjectOfType de manière plus robuste

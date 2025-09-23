@@ -24,6 +24,9 @@ public class GameFlowManager : MonoBehaviour
     [Tooltip("La balise du point de spawn du joueur dans la scène. Ex: 'PlayerSpawn'.")]
     [SerializeField] private string playerSpawnTag = "PlayerSpawn";
 
+    // Champ statique pour stocker le nom de la scène à recharger
+    public static string SceneToReload;
+
     // --- LIFECYCLE ---
     void Awake()
     {
@@ -64,6 +67,14 @@ public class GameFlowManager : MonoBehaviour
     }
 
     // --- INITIALISATION ---
+
+    /// <summary>
+    /// Appeler cette méthode lorsque le joueur commence un niveau
+    /// </summary>
+    public void SetSceneToReload(string sceneName)
+    {
+        SceneToReload = sceneName;
+    }
 
     /// <summary>
     /// Charge une nouvelle scène par son nom.
@@ -112,7 +123,7 @@ public class GameFlowManager : MonoBehaviour
             playerInstance.SetActive(true); // Assurez-vous qu'il est actif
         }
     }
-    
+
     /// <summary>
     /// Gère la fin d'un niveau et la transition vers le suivant.
     /// </summary>
@@ -141,7 +152,7 @@ public class GameFlowManager : MonoBehaviour
         // il pourrait être nécessaire de le nettoyer aussi, selon votre logique de jeu.
         if (PersistentState.Instance != null)
         {
-             PersistentState.Instance.ClearState();
+            PersistentState.Instance.ClearState();
         }
 
         // 3. Changement de scène
@@ -155,4 +166,6 @@ public class GameFlowManager : MonoBehaviour
             Debug.LogWarning("Le nom de la prochaine scène n'est pas défini dans le GameFlowManager !");
         }
     }
+    
+
 }
