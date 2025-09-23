@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: b98dc2138e4030b4aa06f1b923574ad6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerPrefab: {instanceID: 0}
+  - playerSpawn: {instanceID: 0}
+  - spawnerToTrigger: {instanceID: 0}
+  - inventoryUI: {instanceID: 0}
+  - loopRestartSFX: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

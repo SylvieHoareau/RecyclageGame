@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Crate
   - Spawner Object
-  - Player Spawn
   - PlayerSpawn
   - Sign Text
   layers:
