@@ -16896,7 +16896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6620697824411886339, guid: d6467b67561cd1a4a9519ec469662fc1, type: 3}
       propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6620697824411886339, guid: d6467b67561cd1a4a9519ec469662fc1, type: 3}
       propertyPath: OnTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -16943,6 +16943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87cffd7be9bdf481896b94b4d5388be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextSceneName: VictoryScene
 --- !u!1 &1964726143
 GameObject:
   m_ObjectHideFlags: 0
