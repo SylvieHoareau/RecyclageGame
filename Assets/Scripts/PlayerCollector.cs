@@ -5,16 +5,14 @@ public class PlayerCollector : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // On vérifie si l'objet avec lequel on est entré en collision a un script Item.
-        Item collectedItem = other.GetComponent<Item>();
+        // On cherche le composant Collectible.
+        Collectible collectedObject = other.GetComponent<Collectible>();
 
-        // Si l'objet est un Item, on le "collecte".
-        if (collectedItem != null)
+        // Si l'objet a un script Collectible, on le "collecte".
+        if (collectedObject != null)
         {
-            // On appelle la méthode Collect() de l'Item
-            collectedItem.Collect();
-            // On peut ajouter ici l'objet à un inventaire.
-            // Inventory.Instance.AddItem(collectedItem.ItemName, collectedItem.Quantity);
+            // On appelle la méthode Collect() du Collectible
+            collectedObject.Collect(gameObject);
         }
     }
 }
