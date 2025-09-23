@@ -12,54 +12,81 @@ public class MovingObject : MonoBehaviour
     private int currentIndex = 0;
     private Transform currentTarget;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Utilise Awake pour initialiser avant que d'autres scripts ne se réveillent.
+    void Awake()
     {
-        //Set la position et l'index initial a la première valeur de la liste 
-        if (positionList.Count > 0)
+        // 1. Vérifiez si la liste est vide. Si c'est le cas, désactivez le script
+        // pour éviter les erreurs à l'exécution.
+        if (positionList == null || positionList.Count == 0)
         {
-            currentIndex = 0;
-            currentTarget = positionList[currentIndex];
+            Debug.LogError("La liste des positions est vide ! Le script MovingObject sera désactivé pour éviter les erreurs.");
+            enabled = false; // Désactive le script
+            return;
         }
 
+        // 2. Si un objet à déplacer n'est pas assigné, utilisez l'objet actuel.
+        if (objToMove == null)
+        {
+            objToMove = this.gameObject;
+        }
+
+        // 3. Initialise la cible. C'est maintenant sûr de le faire.
+        currentIndex = 0;
+        currentTarget = positionList[currentIndex];
     }
 
-    // Fixed update est appelé a chaque update du moteur physique. Il est preférable de modifier a ce moment les positions des objects physiques
-    void FixedUpdate()
+     void FixedUpdate()
     {
-        // Calcule de l'avancer que vas faire l'object durran cette Fixed frame
-        Vector3 moveDir = (currentTarget.position - objToMove.transform.position).normalized; // On normalise la direction pour que peut importe la distance entre l'objet et la target la vitesse reste identique 
-        Vector3 moveStep = moveDir * speed * Time.fixedDeltaTime; // Ajoute la speed a la direction
+        // Si la cible actuelle n'est pas définie, on sort.
+        if (currentTarget == null) return;
+
+        // Calcule le déplacement et applique le mouvement
+        Vector3 moveDir = (currentTarget.position - objToMove.transform.position).normalized;
+        Vector3 moveStep = moveDir * speed * Time.fixedDeltaTime;
         objToMove.transform.position += moveStep;
 
-        //Si automove et activer et que la distance entre la target et l'objet est infferieur a 0.1, Passer a la position suivante
-        if (autoMove && (objToMove.transform.position - currentTarget.position).magnitude < 0.1f)
+        // Si l'objet est proche de la cible, il passe à la position suivante.
+        if (autoMove && Vector3.Distance(objToMove.transform.position, currentTarget.position) < 0.1f)
         {
             MoveToNextPos();
         }
     }
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // void Start()
+    // {
+    //     //Set la position et l'index initial a la première valeur de la liste 
+    //     if (positionList.Count > 0)
+    //     {
+    //         currentIndex = 0;
+    //         currentTarget = positionList[currentIndex];
+    //     }
+
+    // }
+
     public void MoveToNextPos()
     {
-        // Augmente l'index (équivament a faire currentIndex = currentIndex + 1)
+        // Incrémente l'index pour passer à la position suivante
         currentIndex++;
 
-        // Si looping, fait bouclé l'index a 0 si il est superieur a la taille de la liste
-        if (looping)
+        // Gère la fin de la liste
+        if (currentIndex >= positionList.Count)
         {
-            if (currentIndex > positionList.Count)
+            if (looping)
             {
-                currentIndex = 0;
+                currentIndex = 0; // Revient au début
+            }
+            else
+            {
+                // Si pas de looping, on reste sur la dernière position.
+                // Tu peux aussi désactiver le mouvement ici.
+                Debug.Log("Fin de la trajectoire. Mouvement arrêté.");
+                currentTarget = null; // Stoppe le mouvement
+                return;
             }
         }
 
-        // Change la target
-        if (currentIndex < positionList.Count)
-        {
-            currentTarget = positionList[currentIndex];
-        }
-
+        // Met à jour la cible actuelle
+        currentTarget = positionList[currentIndex];
     }
-
-
 }
