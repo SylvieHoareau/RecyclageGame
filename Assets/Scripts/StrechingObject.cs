@@ -11,6 +11,8 @@ public class StrechingObject : MonoBehaviour
     private Vector2 originalColliderSize;
     [SerializeField] private Collider2D waterCollider; // le collider de l'eau sous le pont
 
+    // Ajout d'une référence au PersistentID de cet objet.
+    private PersistentID persistentID;
 
     void Awake()
     {
@@ -20,6 +22,35 @@ public class StrechingObject : MonoBehaviour
         if (boxCollider != null)
         {
             originalColliderSize = boxCollider.size;
+        }
+
+         // Récupère la référence au PersistentID.
+        // C'est crucial pour identifier cet objet de manière unique.
+        persistentID = GetComponent<PersistentID>();
+        if (persistentID == null)
+        {
+            Debug.LogError("StretchingObject a besoin d'un composant PersistentID pour fonctionner.", this);
+            enabled = false; // Désactive le script s'il n'y a pas d'ID persistant
+            return;
+        }
+
+        // Applique l'état sauvegardé si la scène vient d'être rechargée.
+        // Ceci est le complément de la sauvegarde, il applique l'état au démarrage de la scène.
+        if (PersistentState.Instance != null)
+        {
+            Vector3? savedScale = PersistentState.Instance.GetStretch(persistentID.GUID);
+            if (savedScale.HasValue)
+            {
+                // Applique la taille sauvegardée et met à jour le collider immédiatement
+                transform.localScale = savedScale.Value;
+                UpdateCollider();
+
+                // On désactive aussi le collider de l'eau si le pont est déjà étiré
+                if (waterCollider != null && savedScale.Value.x > originalColliderSize.x)
+                {
+                    waterCollider.enabled = false;
+                }
+            }
         }
     }
 
@@ -53,13 +84,32 @@ public class StrechingObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Met à jour la taille du collider et son offset en fonction de la scale.
+    /// </summary>
+    private void UpdateCollider()
+    {
+        if (boxCollider != null)
+        {
+            // Applique la nouvelle taille en multipliant la taille originale par la scale actuelle
+            boxCollider.size = new Vector2(originalColliderSize.x * transform.localScale.x, originalColliderSize.y * transform.localScale.y);
+
+            // Ajuste l'offset pour maintenir le collider centré
+            boxCollider.offset = new Vector2((transform.localScale.x - 1) * 0.5f, 0);
+        }
+    }
+
     public void ChangeStretch()
     {
         // Sert à étirer le pont
         targetScale = nextScale;
-        PersistentState.Instance.SaveStretch(gameObject, targetScale);
+        // Sauvegarde l'état immédiatement après le changement
+        if (PersistentState.Instance != null && persistentID != null)
+        {
+            PersistentState.Instance.SaveStretch(persistentID.GUID, targetScale);
+        }
 
-        // Ensuite, on désactive l'eau quand le pont est ouvert
+        // On désactive l'eau quand le pont est ouvert
         if (waterCollider != null)
         {
             waterCollider.enabled = false;

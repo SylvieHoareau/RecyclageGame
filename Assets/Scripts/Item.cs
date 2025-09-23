@@ -1,14 +1,17 @@
 using UnityEngine;
+using System;
 
-[System.Serializable]
+[Serializable] // IMPORTANT : Rend la classe visible dans l'Inspecteur
 public class Item
 {
     public string itemName;
-    public Sprite itemSprite;
+    public int quantity;
+    public Sprite itemIcon;
 
-    public Item(string name, Sprite sprite)
+    public Item(string name, int qty, Sprite icon)
     {
         itemName = name;
-        itemSprite = sprite;
+        quantity = qty;
+        itemIcon = icon;
     }
 }

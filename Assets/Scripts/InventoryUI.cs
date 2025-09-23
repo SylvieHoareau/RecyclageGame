@@ -39,33 +39,12 @@ public class InventoryUI : MonoBehaviour
             // On vérifie que le composant est bien présent
             if (slotUI != null)
             {
-                slotUI.UpdateSlot(item.itemSprite, item.itemName);
+                slotUI.UpdateSlot(item.itemIcon, item.itemName);
             }
             else
             {
                 Debug.LogError("Le prefab 'itemSlotPrefab' n'a pas le script 'InventorySlotUI' !");
             }
-
-            // Ajout de vérifications pour éviter les erreurs
-            // Transform itemNameTransform = slot.transform.Find("ItemName");
-            // if (itemNameTransform != null)
-            // {
-            //     TMP_Text itemNameText = itemNameTransform.GetComponent<TMP_Text>();
-            //     if (itemNameText != null)
-            //     {
-            //         itemNameText.text = item.itemName;
-            //     }
-            // }
-
-            // Transform itemImageTransform = slot.transform.Find("ItemImage");
-            // if (itemImageTransform != null)
-            // {
-            //     Image itemImage = itemImageTransform.GetComponent<Image>();
-            //     if (itemImage != null)
-            //     {
-            //         itemImage.sprite = item.itemSprite;
-            //     }
-            // }
         }
     }
 }

@@ -16,6 +16,9 @@ public class GameFlowManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     private GameObject playerInstance;
 
+    [Header("Progression du Niveau")]
+    [Tooltip("Le nom de la prochaine scène à charger.")]
+    [SerializeField] private string nextSceneName = "";
 
     [Header("Transition de niveau")]
     [Tooltip("La balise du point de spawn du joueur dans la scène. Ex: 'PlayerSpawn'.")]
@@ -47,8 +50,8 @@ public class GameFlowManager : MonoBehaviour
         // Nettoyage de l'événement pour éviter les fuites de mémoire
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    
-      // S'abonne à l'événement de changement de scène
+
+    // S'abonne à l'événement de changement de scène
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -61,7 +64,7 @@ public class GameFlowManager : MonoBehaviour
     }
 
     // --- INITIALISATION ---
-    
+
     /// <summary>
     /// Charge une nouvelle scène par son nom.
     /// </summary>
@@ -82,7 +85,7 @@ public class GameFlowManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-   /// <summary>
+    /// <summary>
     /// Est appelée à chaque fois qu'une nouvelle scène est chargée.
     /// Gère la création et le repositionnement du joueur.
     /// </summary>
@@ -107,6 +110,49 @@ public class GameFlowManager : MonoBehaviour
             // Cas de rechargement : on repositionne l'instance existante.
             playerInstance.transform.position = playerSpawn.position;
             playerInstance.SetActive(true); // Assurez-vous qu'il est actif
+        }
+    }
+    
+    /// <summary>
+    /// Gère la fin d'un niveau et la transition vers le suivant.
+    /// </summary>
+    public void EndLevel()
+    {
+        // 1. Logique de vérification (optionnelle)
+        // Vous pourriez vérifier si des objectifs ont été atteints avant de passer au niveau suivant.
+        // Exemple avec un gestionnaire d'inventaire
+        // if (InventoryManager.Instance != null && !InventoryManager.Instance.HasAllRequiredItems())
+        // {
+        //     Debug.LogWarning("Objectifs non atteints. Impossible de passer au niveau suivant.");
+        //     return; // Sort de la méthode sans rien faire.
+        // }
+
+        Debug.Log("Niveau terminé. Chargement du prochain niveau.");
+
+        // 2. Nettoyage et sauvegarde de l'état
+        // Vous devez décider quelles données doivent être nettoyées pour le prochain niveau.
+        // Par exemple, l'inventaire est souvent réinitialisé.
+        // if (InventoryManager.Instance != null)
+        // {
+        //     InventoryManager.Instance.ClearInventory();
+        // }
+
+        // Si vous avez un système de persistance (comme un PersistentState),
+        // il pourrait être nécessaire de le nettoyer aussi, selon votre logique de jeu.
+        if (PersistentState.Instance != null)
+        {
+             PersistentState.Instance.ClearState();
+        }
+
+        // 3. Changement de scène
+        // On vérifie si un nom de scène est défini pour éviter les erreurs.
+        if (!string.IsNullOrEmpty(nextSceneName))
+        {
+            LoadScene(nextSceneName);
+        }
+        else
+        {
+            Debug.LogWarning("Le nom de la prochaine scène n'est pas défini dans le GameFlowManager !");
         }
     }
 }

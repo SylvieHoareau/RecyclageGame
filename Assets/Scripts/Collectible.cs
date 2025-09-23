@@ -4,18 +4,25 @@ public class Collectible : MonoBehaviour
 {
     [Header("Paramètres de collecte")]
     public string itemName;
+    public int quantity = 1;
     public Sprite itemSprite;
-    public bool destroyOnCollect = true;
+    // public bool destroyOnCollect = true;
 
-    public void Collect(GameObject collector)
+    // Le code suivant peut être dans un PlayerController
+    // ou un script spécifique au joueur qui gère les collisions.
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // On trouve le CollectibleManager de la scène et on l'informe
-        CollectibleManager cm = FindObjectOfType<CollectibleManager>();
-        if (cm != null)
+        if (other.CompareTag("Player"))
         {
-            cm.OnItemCollected(this.itemName); // Assumons que le Collectible a une variable itemName
+            // On trouve le CollectibleManager et on l'informe
+            CollectibleManager cm = FindObjectOfType<CollectibleManager>();
+            if (cm != null)
+            {
+                cm.OnItemCollected(this);
+            }
+            
+            // Détruit l'objet collectable après qu'il a été traité.
+            Destroy(gameObject);
         }
-        
-        Destroy(gameObject);
     }
 }

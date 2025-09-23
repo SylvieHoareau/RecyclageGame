@@ -43,8 +43,19 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        items.Add(item);
-        Debug.Log($"[Inventory] Ajouté : {item.itemName}");
+        // Ajoutez une logique pour gérer les objets qui s'empilent
+        // Par exemple, si l'item existe déjà, on incrémente la quantité
+        Item existingItem = items.FirstOrDefault(i => i.itemName == item.itemName);
+        if (existingItem != null)
+        {
+            existingItem.quantity += item.quantity;
+            Debug.Log($"[Inventory] Quantité de {item.itemName} mise à jour : {existingItem.quantity}");
+        }
+        else
+        {
+            items.Add(item);
+            Debug.Log($"[Inventory] Ajouté : {item.itemName}");
+        }
         
         // Notifie les abonnés que l'inventaire a changé
         OnInventoryChanged?.Invoke();
@@ -73,7 +84,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public bool HasItem(string itemName)
     {
-        return items.Exists(i => i.itemName == itemName);
+        return items.Exists(i => i.itemName == itemName && i.quantity > 0);
     }
 
     /// <summary>

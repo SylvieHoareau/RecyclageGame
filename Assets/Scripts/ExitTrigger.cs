@@ -9,9 +9,23 @@ public class ExitTrigger : MonoBehaviour
             Debug.Log("Niveau terminé !");
 
             // Affiche la boîte de dialogue pour annoncer la sortie au joueur
-            FindObjectOfType<TutorialManager>()?.OnExitReached();
-            // On demande au GameFlowManager de gérer la fin du niveau
-            GameFlowManager.Instance.HandleLevelCompletion();
+            // Utilisez FindObjectOfType de manière plus robuste
+            TutorialManager tutorialManager = FindObjectOfType<TutorialManager>();
+            if (tutorialManager != null)
+            {
+                tutorialManager.OnExitReached();
+            }
+
+            // On demande au GameFlowManager de gérer la fin du niveau.
+            // La méthode à appeler est 'EndLevel()', pas 'HandleLevelCompletion()'.
+            if (GameFlowManager.Instance != null)
+            {
+                GameFlowManager.Instance.EndLevel();
+            }
+            else
+            {
+                Debug.LogError("GameFlowManager.Instance est null. Assurez-vous qu'il existe dans la scène.");
+            }
         }
     }
 }

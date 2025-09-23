@@ -75,7 +75,7 @@ public class TimeLoopManager : MonoBehaviour
      /// <summary>
     /// Réinitialise l'état et prépare la prochaine boucle.
     /// </summary>
-    private void StartNewLoop()
+    public void StartNewLoop()
     {
         timeRemaining = loopDuration;
         // On notifie les autres scripts, comme l'UI, que la boucle a démarré/redémarré.
@@ -85,8 +85,14 @@ public class TimeLoopManager : MonoBehaviour
     /// <summary>
     /// Redémarre la boucle temporelle ou termine la partie si le nombre de boucles est atteint.
     /// </summary>
-    private void RestartLoop()
+    public void RestartLoop()
     {
+        // Sauvegarde l'état de la scène avant de recharger
+        if (PersistentState.Instance != null)
+        {
+            PersistentState.Instance.SaveCurrentState();
+        }
+        
         loopCount++;
 
         // Si on dépasse le nombre max de boucles, c'est Game Over.

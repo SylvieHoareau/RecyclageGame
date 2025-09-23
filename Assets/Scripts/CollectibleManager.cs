@@ -20,16 +20,25 @@ public class CollectibleManager : MonoBehaviour
         UpdateUI();
     }
 
-    /// <summary>
+     /// <summary>
     /// Gère la collecte d'un objet.
     /// </summary>
-    public void OnItemCollected(string itemName)
+    public void OnItemCollected(Collectible collectible)
     {
-        // Ajoute l'item à l'inventaire persistant
-        // (Assumons que vous avez un script Inventory persistant)
-        Inventory.Instance.AddItem(new Item(itemName, null)); // Remplacez null par le Sprite de l'objet
-        Debug.Log($"Item collecté : {itemName}");
-
+         // On s'assure que l'inventaire existe
+        if (Inventory.Instance != null)
+        {
+            // Crée un nouvel 'Item' de données et l'ajoute à l'inventaire
+            Item newItem = new Item(collectible.itemName, collectible.quantity, collectible.itemSprite);
+            Inventory.Instance.AddItem(newItem);
+            
+            Debug.Log($"Item collecté : {collectible.itemName}");
+        }
+        else
+        {
+            Debug.LogError("Inventory.Instance est null. Assurez-vous qu'il existe dans la scène.");
+        }
+        
         // Actualise l'UI de l'inventaire
         UpdateUI();
 

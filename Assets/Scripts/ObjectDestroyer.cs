@@ -7,13 +7,27 @@ public class ObjectDestroyer : MonoBehaviour
         // On vérifie si l'objet qui entre dans le trigger est le joueur.
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Au lieu de détruire le joueur, on demande au GameFlowManager de le réinitialiser.
-            GameFlowManager.Instance.RestartLoop();
+            // Le joueur a un comportement spécifique.
+            // On délègue la gestion de sa destruction au TimeLoopManager.
+            if (TimeLoopManager.Instance != null)
+            {
+                TimeLoopManager.Instance.RestartLoop();
+            }
+
         }
         else
         {
-            // Pour tous les autres objets, on les détruit et on les marque comme détruits pour la persistance.
-            PersistentState.Instance.MarkAsDestroyed(collision.gameObject);
+           // Pour tous les autres objets, on les marque comme détruits pour la persistance.
+            if (PersistentState.Instance != null)
+            {
+                // La méthode MarkAsDestroyed a été mise à jour pour prendre le GUID
+                PersistentID id = collision.gameObject.GetComponent<PersistentID>();
+                if (id != null)
+                {
+                    PersistentState.Instance.MarkAsDestroyed(id.GUID);
+                }
+            }
+            // Et on détruit l'objet dans la scène.
             Destroy(collision.gameObject);
         }
     }

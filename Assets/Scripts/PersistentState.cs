@@ -98,6 +98,7 @@ public class PersistentState : MonoBehaviour
     public void MarkAsDestroyed(string guid)
     {
         destroyedObjects.Add(guid);
+        Debug.Log($"Objet '{guid}' marqué comme détruit.");
     }
 
     public bool IsDestroyed(string guid)
