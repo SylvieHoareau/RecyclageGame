@@ -7,7 +7,7 @@ TagManager:
   - Crate
   - Spawner Object
   - PlayerSpawn
-  - Sign Text
+  - SignText
   layers:
   - Default
   - TransparentFX
