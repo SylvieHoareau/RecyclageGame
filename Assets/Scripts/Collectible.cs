@@ -9,9 +9,13 @@ public class Collectible : MonoBehaviour
 
     public void Collect(GameObject collector)
     {
-        if (collector.CompareTag("Player"))
+        // On trouve le CollectibleManager de la scène et on l'informe
+        CollectibleManager cm = FindObjectOfType<CollectibleManager>();
+        if (cm != null)
         {
-            GameFlowManager.Instance.HandleCollectible(this, collector);
+            cm.OnItemCollected(this.itemName); // Assumons que le Collectible a une variable itemName
         }
+        
+        Destroy(gameObject);
     }
 }

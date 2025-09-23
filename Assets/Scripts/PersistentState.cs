@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq; // Nécessaire pour les requêtes LINQ
 
 public class PersistentState : MonoBehaviour
 {
-    public static PersistentState Instance;
+    public static PersistentState Instance { get; private set; }
 
     // Liste des objets détruits
     private HashSet<string> destroyedObjects = new HashSet<string>();
@@ -20,8 +21,9 @@ public class PersistentState : MonoBehaviour
         // Singleton
         if (Instance == null)
         {
+            // Empêche d'avoir 2 Persistent State dans la scène
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -29,9 +31,9 @@ public class PersistentState : MonoBehaviour
         }
     }
 
-    // ===========================
-    // Ajout de la fonction ClearState
-    // ===========================
+    /// <summary>
+    /// Réinitialise toutes les données de persistance.
+    /// </summary>
     public void ClearState()
     {
         // Efface tous les éléments des collections de persistance.
@@ -43,69 +45,69 @@ public class PersistentState : MonoBehaviour
         Debug.Log("L'état persistant a été réinitialisé.");
     }
 
-    // ============================
-    // Gestion de la destruction 
-    // ============================
-    public void MarkAsDestroyed(GameObject obj)
+    /// <summary>
+    /// Enregistre l'état actuel de tous les objets persistants dans la scène.
+    /// </summary>
+     public void SaveCurrentState()
     {
+        // 1. On trouve tous les objets de la scène qui ont le composant PersistentObject
+        PersistentObject[] persistentObjects = FindObjectsOfType<PersistentObject>();
 
-        PersistentID id = obj.GetComponent<PersistentID>();
-        if (id != null)
+        // 2. Pour chaque objet, on lui demande de sauvegarder son état
+        foreach (var obj in persistentObjects)
         {
-            destroyedObjects.Add(id.GUID);
+            obj.SaveState();
         }
+
+        Debug.Log($"État de {persistentObjects.Length} objets sauvegardé.");
     }
 
-    public bool IsDestroyed(string objName)
+    // ============================
+    // Méthodes pour gérer la persistance
+    // Ces méthodes sont appelées par les objets eux-mêmes.
+    // ============================
+    
+     public void SavePosition(string guid, Vector3 newPos)
     {
-        return destroyedObjects.Contains(objName);
+        movedObjects[guid] = newPos;
     }
 
-    //===========================
-    // Gestion du stretching
-    //===========================
-    public void SaveStretch(GameObject obj, Vector3 newScale)
+    public Vector3? GetSavedPosition(string guid)
     {
-        PersistentID id = obj.GetComponent<PersistentID>();
-        if (id != null)
+        if (movedObjects.TryGetValue(guid, out Vector3 pos))
         {
-            stretchedObjects[id.GUID] = newScale;
-        }
-    }
-
-    public Vector3? GetStretch(string objName)
-    {
-        if (stretchedObjects.ContainsKey(objName))
-        {
-            return stretchedObjects[objName];
+            return pos;
         }
         return null;
     }
 
-    // ==========================
-    // Gestion du déplacement
-    // ==========================
-    public void SavePosition(GameObject obj, Vector3 newPos)
+    public void SaveStretch(string guid, Vector3 newScale)
     {
-        PersistentID id = obj.GetComponent<PersistentID>();
-        if (id != null)
-        {
-            movedObjects[id.GUID] = newPos;
-        }
+        stretchedObjects[guid] = newScale;
     }
 
-    public Vector3? GetSavedPosition(string objName)
+    public Vector3? GetStretch(string guid)
     {
-        if (movedObjects.ContainsKey(objName))
+        if (stretchedObjects.TryGetValue(guid, out Vector3 scale))
         {
-            return movedObjects[objName];
+            return scale;
         }
         return null;
     }
 
-    //=====================
-    // Application des états
-    //======================
+    public void MarkAsDestroyed(string guid)
+    {
+        destroyedObjects.Add(guid);
+    }
+
+    public bool IsDestroyed(string guid)
+    {
+        return destroyedObjects.Contains(guid);
+    }
+
+    /// <summary>
+    /// Applique les états sauvegardés aux objets de la scène.
+    /// </summary>
     public void ApplyStateToScene()
     {
         foreach (GameObject obj in FindObjectsOfType<GameObject>())

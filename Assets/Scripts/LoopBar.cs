@@ -11,69 +11,62 @@ public class LoopBar : MonoBehaviour
     [SerializeField] private TextMeshProUGUI loopTimerText; // pour 00:00
     [SerializeField] private TextMeshProUGUI loopCounterText; // pour Boucle 1, Boucle 2...
 
-    [Header("Loop Settings")]
-    [SerializeField] private float loopDuration = 30f; // durée d'une boucle en secondes
 
     void Start()
     {
-        if (GameFlowManager.Instance != null)
+        if (TimeLoopManager.Instance != null)
         {
-            GameFlowManager.Instance.OnLoopRestart += OnLoopReset;
+            TimeLoopManager.Instance.OnLoopRestart += OnLoopReset;
         }
 
-         // Init du slider
-        if (loopSlider != null)
+        // Initialisation de la barre
+        if (loopSlider != null && TimeLoopManager.Instance != null)
         {
             loopSlider.minValue = 0f;
-            loopSlider.maxValue = GameFlowManager.Instance.loopDuration;
-            loopSlider.value = GameFlowManager.Instance.loopDuration;
+            loopSlider.maxValue = TimeLoopManager.Instance.LoopDuration;
         }
+        
+        // Initialise l'affichage au démarrage
+        UpdateUI();
     }
 
     void Update()
     {
-        // On s'assure que l'instance du manager existe pour éviter les erreurs
-        if (GameFlowManager.Instance == null)
-        {
-            return;
-        }
+        UpdateUI();
+    }
 
-        // On lit les valeurs directement depuis le GameFlowManager
-        float currentLoopTime = GameFlowManager.Instance.loopTimer;
-        float loopDuration = GameFlowManager.Instance.loopDuration;
+    private void UpdateUI()
+    {
+        if (TimeLoopManager.Instance == null) return;
 
-        // --- Image Fill (style radial ou horizontal)
-        // if (loopFill != null)
-        // {
-        //     float fillAmount = Mathf.Clamp01(currentLoopTime / loopDuration);
-        //     loopFill.fillAmount = fillAmount;
-        // }
+        // On lit les valeurs directement depuis le TimeLoopManager
+        float currentLoopTime = TimeLoopManager.Instance.TimeRemaining;
+        float loopDuration = TimeLoopManager.Instance.LoopDuration;
+        int loopCount = TimeLoopManager.Instance.LoopCount;
 
-        // --- Slider (style barre de vie)
+        // Mise à jour du Slider
         if (loopSlider != null)
         {
-            loopSlider.maxValue = loopDuration;
             loopSlider.value = currentLoopTime;
         }
 
-        // On formate le texte pour afficher le temps restant
-        // Timer (00:00)
+        // Formatage du texte pour le timer (00:00)
         int minutes = Mathf.FloorToInt(currentLoopTime / 60);
         int seconds = Mathf.FloorToInt(currentLoopTime % 60);
         loopTimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        // Numéro de boucle
+        // Mise à jour du texte du compteur de boucles
         if (loopCounterText != null)
         {
-            loopCounterText.text = $"Boucle {GameFlowManager.Instance.loopCount}";
+            loopCounterText.text = $"Boucle {loopCount}";
         }
     }
 
     private void OnDestroy()
     {
-        if (GameFlowManager.Instance != null)
+        if (TimeLoopManager.Instance != null)
         {
-            GameFlowManager.Instance.OnLoopRestart -= OnLoopReset;
+            TimeLoopManager.Instance.OnLoopRestart -= OnLoopReset;
         }
     }
 
@@ -82,12 +75,12 @@ public class LoopBar : MonoBehaviour
         // Ici tu peux déclencher des effets : flash, son, reset d’objets, etc.
         Debug.Log("Nouvelle boucle !");
 
-        // 1. 🔊 Jouer un son
+        // 1. Jouer un son
         AudioSource audio = GetComponent<AudioSource>();
         if (audio != null)
             audio.Play();
 
-        // 2. 💡 Déclencher un flash visuel (coroutine)
+        // 2. Déclencher un flash visuel (coroutine)
         StartCoroutine(FlashScreen());
     }
 
